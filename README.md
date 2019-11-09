@@ -1,2 +1,2 @@
 # DummyRestTesting
-Public Git to test a dummy API
+Public Git to test a dummy API with Java
