@@ -9,7 +9,7 @@ import io.restassured.http.ContentType;
 import static io.restassured.RestAssured.given;
 
 import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
+//import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -200,45 +200,45 @@ public class TestRest{
         Assert.assertEquals("1", employee_info.get("id")); 
     }
 
-    @Test
-    public void dummyGetCreate_1(){
-        //JsonPath return_rest = dummyGetCreate("Marceline the Vampire Queen", "Souls", "10000", "", "", "");
+    // @Test
+    // public void dummyGetCreate_1(){
+    //     //JsonPath return_rest = dummyGetCreate("Marceline the Vampire Queen", "Souls", "10000", "", "", "");
 
-        RequestSpecification httpRequest = RestAssured.given();
+    //     RequestSpecification httpRequest = RestAssured.given();
 
 
-        // JsonObject params = new JsonObject();
-        // params.addProperty("employee_name", "Marceline");
-        // params.addProperty("employee_salary", "Souls");
-        // params.addProperty("employee_age", "10000");
-        // params.addProperty("profile_image", "");
-        //httpRequest.body(params.toString()).when();
+    //     // JsonObject params = new JsonObject();
+    //     // params.addProperty("employee_name", "Marceline");
+    //     // params.addProperty("employee_salary", "Souls");
+    //     // params.addProperty("employee_age", "10000");
+    //     // params.addProperty("profile_image", "");
+    //     //httpRequest.body(params.toString()).when();
         
-        JSONObject params = new JSONObject(); 
-        params.put("employee_name", "Marceline");
-        params.put("employee_salary", "Souls");
-        params.put("employee_age", "10000");
-        params.put("profile_image", "");
+    //     JSONObject params = new JSONObject(); 
+    //     params.put("employee_name", "Marceline");
+    //     params.put("employee_salary", "Souls");
+    //     params.put("employee_age", "10000");
+    //     params.put("profile_image", "");
 
-        String params_as_string = params.toString();
+    //     String params_as_string = params.toString();
 
-        Response response1 = httpRequest.accept(ContentType.JSON).contentType(ContentType.JSON).
-        queryParam("employee_name", "Marceline").with().
-        body(params_as_string.toString()).
-        post("http://dummy.restapiexample.com/api/v1/create");
+    //     Response response1 = httpRequest.accept(ContentType.JSON).contentType(ContentType.JSON).
+    //     queryParam("employee_name", "Marceline").with().
+    //     body(params_as_string.toString()).
+    //     post("http://dummy.restapiexample.com/api/v1/create");
 
 
         
         
 
-        //Response response = httpRequest.post("http://dummy.restapiexample.com/api/v1/create");
+    //     //Response response = httpRequest.post("http://dummy.restapiexample.com/api/v1/create");
 
-        System.out.println(response1.prettyPrint());
-        // String authorizationHeadeString = response.getHeader("Accept");
-        // System.out.println(authorizationHeadeString);
+    //     System.out.println(response1.prettyPrint());
+    //     // String authorizationHeadeString = response.getHeader("Accept");
+    //     // System.out.println(authorizationHeadeString);
 
 
-    }
+    // }
     @Test 
     public void postClassTry5(){
         class Employee_User {
@@ -272,9 +272,13 @@ public class TestRest{
 		user.set_age("10000");
         user.set_salary("Souls");
         
-		Response response = RestAssured.given().headers("Content-Type", "application/json").contentType(ContentType.JSON)
-			.baseUri("http://dummy.restapiexample.com/api/v1")
-			.body(user)
+        RestAssured.baseURI = "http://dummy.restapiexample.com/api/v1";
+
+		Response response = RestAssured.given()
+            .body(user)
+            .when()
+            .contentType(ContentType.JSON)
 			.post("/create").prettyPeek();
     }
+    //.headers("Content-Type", "application/json").contentType(ContentType.JSON).baseUri("http://dummy.restapiexample.com/api/v1")
 }
