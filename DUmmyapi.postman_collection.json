@@ -1,0 +1,1353 @@
+{
+	"info": {
+		"_postman_id": "d595d845-0023-4c28-ad27-5a079beaeaf0",
+		"name": "DUmmyapi",
+		"description": "Exercise for growin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DummyGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				},
+				"description": "Gets info of API Dummy"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetSingle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Gets first employee"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetsEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				},
+				"description": "Gets all employee"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_1 ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Post /create receives error with col\n\nWhen POST\"http://dummy.restapiexample.com/api/v1/create\"\nand no body info\nthen response is error \"Integrity constraint violation: 1048 Column 'employee_name' cannot be null\""
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"potatoe\",\n \"salary\":\"69420\",\n \"age\": \"32\",\n \"id\": \"619\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "\n\nPost /create is success\n\nGiven\nfirst instance of this method\n\nWhen POST\"http://dummy.restapiexample.com/api/v1/create\"\nand body info is {\"potatoe\", \"69420\",\"32\",\"619\"}\n\nthen \n{\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_2.1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"potatoe\",\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Duplicate names not acceptable\n\n\nGiven run test DummyGetCreate_2\nand passed\n\nWhen \nsend POST \"http://dummy.restapiexample.com/api/v1/create\"\n\n\nThen i get the response \nIntegrity constraint violation: 1062 Duplicate entry 'potatoe' for key\n'employee_name_unique'\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_2.2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"potatoe\",\n \"salary\":\"69420\",\n \"age\": \"32\",\n \"id\": \"619\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/80543",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"80543"
+					]
+				},
+				"description": "Given run test DummyGetCreate_2\nand passed\n\nWhen \nsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen i get the response {\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_2.3",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"potatoe\",\n \"salary\":\"69420\",\n \"age\": \"32\",\n \"id\": \"619\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/80543",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"80543"
+					]
+				},
+				"description": "Given run test DummyGetCreate_2.2\nand passed\n\nWhen \nsend DELETE \"http://dummy.restapiexample.com/api/v1/delete/74826\"\n\n\nThen i get the response \n{\"success\":{\"text\":\"successfully! deleted Records\"}}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_2.4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"potatoe\",\n \"salary\":\"69420\",\n \"age\": \"32\",\n \"id\": \"619\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/74826",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"74826"
+					]
+				},
+				"description": "Given run test DummyGetCreate_2.3\nand passed\n\nWhen \nsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen i get the response \nfalse"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"lump\",\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "creates with no id needed\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_3.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"lump\",\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/74935",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"74935"
+					]
+				},
+				"description": "gets lump info with id\n\nGiven\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/74935\" \n \nthen\ni get the response\n{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"lumpprincess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "name with wierd characters hypothesis\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lumpprincess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"id\":\"74963\",\"employee_name\":\"lumpprincess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"lump$êri*c/ess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "wierd name chars acceptable\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump$êri*c/ess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n{\"id\":\"74988\",\"employee_name\":\"lump$\\u00eari*c\\/ess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_6",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"finnthehuman\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Missing salary\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\"}\n \nthen get the response\nIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_6.1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"finnthehuman\",\n \"age\": \"32\",\n \"salary\": \"\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Missing salary with \"\"\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\"}\n \nthen get the response\nIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"finnthehooman\",\n \"salary\":\"friendship\",\n \"age\": \"17\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Test invalid salary with chars\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehooman\",\n \"salary\":\"friendship\",\n \"age\": \"17\"}\n \nthen get the response\n{\"name\":\"finnthehooman\",\"salary\":\"friendship\",\"age\":\"17\",\"id\":\"75062\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"jakethedog\",\"salary\":\"10000\",\n \"age\": \"30 but in dog years\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Test invalid age with chars\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"jakethedog\",\"salary\":\"10000\",\n \"age\": \"30 but in dog years\"}\n \nthen\ni get the response\n{\"name\":\"jakethedog\",\"salary\":\"10000\",\"age\":\"30 but in dog years\",\"id\":\"75798\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_9",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/createz",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"createz"
+					]
+				},
+				"description": "Test wrong URL\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/createz\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"}\n \nthen\ni get the response\nPAGE NOT FOUND"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_10",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Test invalid body not json\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"\n \nthen\ni get the response\nIntegrity constraint violation: 1048 Column 'employee_name' cannot be null"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_11",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": 73,\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "name is int\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 73,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"73\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76201\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_12",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": true,\n \"salary\":\"69420\",\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "name is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": true,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"1\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76229\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_13",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": 76,\n \"salary\": false,\n \"age\": \"32\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "salary is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 76,\n \"salary\": false,\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"76\",\"salary\":\"\",\"age\":\"32\",\"id\":\"76274\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_14",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": 77,\n \"salary\": false,\n \"age\": false}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "age is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 77,\n \"salary\": true,\n \"age\": false}\n \nthen\ni get the response\n{\"name\":\"77\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_15",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": [79,80],\n \"salary\": false,\n \"age\": false}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "array is accepted\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": [79,80],\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\n{\"name\":\"Array\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_16",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": {\"name\":80,\n\t\t\"salary\":false,\n\t\t\"age\":false},\n \"salary\": false,\n \"age\": false}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "object is accepted\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": {\"name\":80,\n\t\t\"salary\":false,\n\t\t\"age\":false},\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\nstatus code 520 Uknown HTTP status\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_17",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": null,\n \"salary\": false,\n \"age\": false}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "null is name\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": null,\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\nIntegrity constraint violation: 1048 Column 'employee_name' cannot be null}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_18",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": Marceline,\n \"salary\": \"souls\",\n \"age\": \"2030\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Get with correct post\n\nGiven\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": Marceline,\n \"salary\": \"souls\",\n \"age\": \"2030\"}\n \nthen\ni get the response\nMethod not allowed. Must be one of: POST"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_19",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Marceline\",\n \"salary\": \"souls\",\n \"age\": \"10000\",\n \"image\":\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a7d01285-80eb-4ae1-87e1-fb0dea734617/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png/v1/fill/w_1600,h_1163,q_75,strp/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Creates profile with picture\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Marceline\",\n \"salary\": \"souls\",\n \"age\": \"10000\",\n \"image\":\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a7d01285-80eb-4ae1-87e1-fb0dea734617/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png/v1/fill/w_1600,h_1163,q_75,strp/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\"}\n \nthen\ni get the response\n{\"name\":\"Marceline\",\"salary\":\"souls\",\"age\":\"10000\",\"image\":\"https:\\/\\/images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com\\/f\\/a7d01285-80eb-4ae1-87e1-fb0dea734617\\/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png\\/v1\\/fill\\/w_1600,h_1163,q_75,strp\\/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\",\"id\":\"79314\"}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_19.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/79314",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"79314"
+					]
+				},
+				"description": "Verifies profile was created without picture profile \n\nGiven DummyGetCreate_19 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/79314\" with body \n\n \nthen\ni get the response\n{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_20",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Rainicorn\",\n \"salary\": \"colours\",\n \"age\": \"endless\",\n \"attributes\": \"slim\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Creates profile with extra field\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Rainicorn\",\n \"salary\": \"colours\",\n \"age\": \"endless\",\n \"attributes\": \"slim\"}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_20.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/79402",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"79402"
+					]
+				},
+				"description": "Verifies profile with extra field is created\n\nGiven DummyGetCreate_20 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/79402\" with body \n\n \nthen\ni get the response\n{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_21",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"corn\",\n \"salary\": \"yellow\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Age is empty\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\"}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetCreate_21.1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"corn\",\n \"salary\": \"yellow\",\n \"age\": \"\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				},
+				"description": "Age is null\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\",\n\t\"age\": null\n}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Buns\",\n \"salary\": 2,\n \"age\": \"ripe\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/76649",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"76649"
+					]
+				},
+				"description": "Creates employee with put \n\nGiven\nid exists\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n{\"name\": \"Buns\",\n \"salary\": 2,\n \"age\": \"ripe\"}\n \nthen\ni get the response\n{\"name\":\"Buns\",\"salary\":\"2\",\"age\":\"ripe\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_1.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/76649",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"76649"
+					]
+				},
+				"description": "Verifies employee is updated\n\nGiven\nDummyPutUpdate_1 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n\n \nthen\ni get the response\n{\"id\":\"76649\",\"employee_name\":\"Buns\",\"employee_salary\":\"2\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Gets first employee\n\nGiven\n\nWhen \nsnd GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\nthen get the response\n{\"id\":\"1\",\"employee_name\":\"ada\",\"employee_salary\":\"1236\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_2.1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PB\",\n \"salary\": \"science\",\n \"age\": -7}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"1"
+					]
+				},
+				"description": "Updates first emplyee\n\nGiven\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}\n\nthen get the response\n{\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_2.2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Updates first emplyee\n\nGiven DummyPutUpdate_2.1 ran successfully\n\nWhen \nsend GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\n\nthen get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"0\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_2.3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PBubble\",\n \"salary\": \"science\",\n \"age\": \"math\"\n \"id\": 69420}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"1"
+					]
+				},
+				"description": "Updates first employee\n\nGiven DummyPutUpdate_2.2 ran successfuly\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\", \"id\":\"69420\"}\n\nthen get the response\n{\"error\":{\"text\":SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key\n'employee_name_unique'}}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Bacon\",\"salary\":\"crispy\",\"age\":\"salt\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/bacon",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"bacon"
+					]
+				},
+				"description": "Updates creates bacon id\n\nGiven\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\nwith {\"name\":\"Bacon\",\"salary\":\"crispy\",\"age\":\"salt\"}\n\nthen get the response\nMethod not allowed. Must be one of: GET\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_3.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/bacon",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"bacon"
+					]
+				},
+				"description": "Gets bacon id\n\nGiven DummyPutUpdate_3 ran successfuly\n\nWhen \nsend GET with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\n\n\nthen get the response\n{\"error\":{\"text\":SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bacon' in 'where clause'}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_4",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PB\",\n \"salary\": -80000,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"1"
+					]
+				},
+				"description": "Updates first employee with put method and populates profile picture\n\nGiven\n\n\nwhen \nPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": -80000,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\ni get the response\n{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"profile_image\":\"https:\\/\\/theicekingisapatoot.files.wordpress.com\\/2013\\/03\\/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_4.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Get first employee\n\nGiven DummyPutUpdate_4 ran successfully\n\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\ni get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"-80000\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_5",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"bubble\":\"gum\"}"
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/update/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"1"
+					]
+				},
+				"description": "Updates first employee with extra field\n\nGiven\n\n\nwhen \nPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"bubble\":\"gum\"}\n \nthen\ni get the response\n{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"bubble\":\"gum\"}\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyPutUpdate_5.1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/1",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"1"
+					]
+				},
+				"description": "Get first employee with extra field\n\nGiven DummyPutUpdate_6 ran successfully\n\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n\n \nthen\ni get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"1\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyDeleteEmployees_1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/*",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"*"
+					]
+				},
+				"description": "Deletes all employees\n\nGiven \n\n\nWhen \nDELETE with http://dummy.restapiexample.com/api/v1/delete/*\n\nthen\nreceives response\n\"success\":{\"text\":\"successfully! deleted Records\"}}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyDeleteEmployees_1.1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employees",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				},
+				"description": "Gets All employees\n\nGiven DummyDeleteEmployees_1 ran successfully\n\nWhen\nGET with \"http://dummy.restapiexample.com/api/v1/employees\"\n\nThen\nJson with all employees\n"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyDeleteEmployee_1",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/79402",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"79402"
+					]
+				},
+				"description": "Gets info of Deletes single Employee\n\nGiven \nDummyGetCreate_20 ran successfuly\n\n\nWhen \nDELETE with http://dummy.restapiexample.com/api/v1/delete/79402\n\nthen\nreceives response\n\"success\":{\"text\":\"successfully! deleted Records\"}}"
+			},
+			"response": []
+		},
+		{
+			"name": "DummyDeleteEmployee_1.1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/79402",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"79402"
+					]
+				},
+				"description": "Gets deleted employee\n\nGiven DummyDeleteEmployee_1 ran successfully\n\nWhen\nGET with \"http://dummy.restapiexample.com/api/v1/employee/79402\"\n\nThen\nfalse\n"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
