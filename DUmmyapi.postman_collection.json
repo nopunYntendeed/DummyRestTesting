@@ -30,7 +30,7 @@
 			"response": []
 		},
 		{
-			"name": "DummyGetSingle",
+			"name": "DummyGetSingle_1",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -49,7 +49,31 @@
 						"1"
 					]
 				},
-				"description": "Gets first employee"
+				"description": "Gets data of single valid employee\n\nGiven \n\tvalid employee id\nWhen \n\tGET\"http://dummy.restapiexample.com/api/v1/employee/{id}\"\n\tand no body info\nthen \n\tresponse is error \"Integrity constraint violation: 1048 Column 'employee_name' cannot be null\""
+			},
+			"response": []
+		},
+		{
+			"name": "DummyGetSingle 1.1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://dummy.restapiexample.com/api/v1/employee/2",
+					"protocol": "http",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"2"
+					]
+				},
+				"description": "Gets data of single not valid employee\n\nGiven \n\tvalid employee id\nWhen \n\tGET\"http://dummy.restapiexample.com/api/v1/employee/2\"\n\tand no body info\nthen \n\tresponse is error \"Integrity constraint violation: 1048 Column 'employee_name' cannot be null\""
 			},
 			"response": []
 		},
@@ -72,7 +96,7 @@
 						"employees"
 					]
 				},
-				"description": "Gets all employee"
+				"description": "Gets all employees\n\n\n\nGiven \n\nWhen \n\tGET\"http://dummy.restapiexample.com/api/v1/employees\"\n\tand no body info\nthen \n\tAll the employees info"
 			},
 			"response": []
 		},
@@ -95,7 +119,7 @@
 						"create"
 					]
 				},
-				"description": "Post /create receives error with col\n\nWhen POST\"http://dummy.restapiexample.com/api/v1/create\"\nand no body info\nthen response is error \"Integrity constraint violation: 1048 Column 'employee_name' cannot be null\""
+				"description": "Tests post with no body\n\nGiven\n\nWhen \n\tPOST\"http://dummy.restapiexample.com/api/v1/create\"\n\tand no body info\nthen \n\t\"Integrity constraint violation: 1048 Column 'employee_name' cannot be null\""
 			},
 			"response": []
 		},
@@ -122,7 +146,7 @@
 						"create"
 					]
 				},
-				"description": "\n\nPost /create is success\n\nGiven\nfirst instance of this method\n\nWhen POST\"http://dummy.restapiexample.com/api/v1/create\"\nand body info is {\"potatoe\", \"69420\",\"32\",\"619\"}\n\nthen \n{\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "Tests valid body\n\nGiven\n\tfirst instance of this method\n\nWhen \n\tPOST\"http://dummy.restapiexample.com/api/v1/create\"\n\tand body info is {\"potatoe\", \"69420\",\"32\",\"619\"}\n\nthen \n\t{\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -149,7 +173,7 @@
 						"create"
 					]
 				},
-				"description": "Duplicate names not acceptable\n\n\nGiven run test DummyGetCreate_2\nand passed\n\nWhen \nsend POST \"http://dummy.restapiexample.com/api/v1/create\"\n\n\nThen i get the response \nIntegrity constraint violation: 1062 Duplicate entry 'potatoe' for key\n'employee_name_unique'\n\n"
+				"description": "Duplicate names not acceptable\n\n\nGiven \n\trun test DummyGetCreate_2\n\tand passed\n\nWhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\"\n\tand valid body\n\n\nThen\n\tIntegrity constraint violation: 1062 Duplicate entry 'potatoe' for key 'employee_name_unique'\n\n"
 			},
 			"response": []
 		},
@@ -180,7 +204,7 @@
 						"80543"
 					]
 				},
-				"description": "Given run test DummyGetCreate_2\nand passed\n\nWhen \nsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen i get the response {\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "Validates get\n\nGiven \n\trun test DummyGetCreate_2.1 and passed\n\nWhen \n\tsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen \n\t{\"id\":\"74826\",\"employee_name\":\"potatoe\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -208,7 +232,7 @@
 						"80543"
 					]
 				},
-				"description": "Given run test DummyGetCreate_2.2\nand passed\n\nWhen \nsend DELETE \"http://dummy.restapiexample.com/api/v1/delete/74826\"\n\n\nThen i get the response \n{\"success\":{\"text\":\"successfully! deleted Records\"}}"
+				"description": "Tests delete\n\nGiven \n\trun test DummyGetCreate_2.2 and passed\n\nWhen \n\tsend DELETE \"http://dummy.restapiexample.com/api/v1/delete/74826\"\n\n\nThen \n\t{\"success\":{\"text\":\"successfully! deleted Records\"}}"
 			},
 			"response": []
 		},
@@ -239,7 +263,7 @@
 						"74826"
 					]
 				},
-				"description": "Given run test DummyGetCreate_2.3\nand passed\n\nWhen \nsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen i get the response \nfalse"
+				"description": "Validates delete\n\nGiven \n\trun test DummyGetCreate_2.3 and passed\n\nWhen \n\tsend GET \"http://dummy.restapiexample.com/api/v1/employee/74826\"\n\n\nThen \n\tfalse"
 			},
 			"response": []
 		},
@@ -266,7 +290,7 @@
 						"create"
 					]
 				},
-				"description": "creates with no id needed\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "creates with no id needed\n\nGiven\n\tvalid POST body\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n\n\t{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -297,7 +321,7 @@
 						"74935"
 					]
 				},
-				"description": "gets lump info with id\n\nGiven\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/74935\" \n \nthen\ni get the response\n{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "confirms creation\n\nGiven\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/employee/74935\" \n \nthen\n\t{\"id\":\"74935\",\"employee_name\":\"lump\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -324,7 +348,7 @@
 						"create"
 					]
 				},
-				"description": "name with wierd characters hypothesis\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lumpprincess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"id\":\"74963\",\"employee_name\":\"lumpprincess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "Tests name with numbers hypothesis\n\nGiven\n\tvalid POST body\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lumpprincess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n\t{\"id\":\"74963\",\"employee_name\":\"lumpprincess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -351,7 +375,7 @@
 						"create"
 					]
 				},
-				"description": "wierd name chars acceptable\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump$êri*c/ess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n{\"id\":\"74988\",\"employee_name\":\"lump$\\u00eari*c\\/ess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
+				"description": "Tests wierd name chars \n\nGiven\n\tvalid POST body\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"lump$êri*c/ess404\",\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n\t{\"id\":\"74988\",\"employee_name\":\"lump$\\u00eari*c\\/ess404\",\"employee_salary\":\"69420\",\"employee_age\":\"32\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -378,7 +402,7 @@
 						"create"
 					]
 				},
-				"description": "Missing salary\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\"}\n \nthen get the response\nIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
+				"description": "Missing salary\n\nGiven\n\tvalid POST body (besides test focus)\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\"}\n \nthen \n\tIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
 			},
 			"response": []
 		},
@@ -405,7 +429,7 @@
 						"create"
 					]
 				},
-				"description": "Missing salary with \"\"\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\"}\n \nthen get the response\nIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
+				"description": "Missing salary with \"\"\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"finnthehuman\",\n \"age\": \"32\",\n \"salary\":\"\"\n}\n \nthen\n\tIntegrity constraint violation: 1048 Column 'employee_salary' cannot be null}"
 			},
 			"response": []
 		},
@@ -459,7 +483,7 @@
 						"create"
 					]
 				},
-				"description": "Test invalid age with chars\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"jakethedog\",\"salary\":\"10000\",\n \"age\": \"30 but in dog years\"}\n \nthen\ni get the response\n{\"name\":\"jakethedog\",\"salary\":\"10000\",\"age\":\"30 but in dog years\",\"id\":\"75798\"}"
+				"description": "Test invalid age with chars\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"jakethedog\",\"salary\":\"10000\",\n \"age\": \"30 but in dog years\"}\n \nthen\n\t{\"name\":\"jakethedog\",\"salary\":\"10000\",\"age\":\"30 but in dog years\",\"id\":\"75798\"}"
 			},
 			"response": []
 		},
@@ -486,7 +510,7 @@
 						"createz"
 					]
 				},
-				"description": "Test wrong URL\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/createz\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"}\n \nthen\ni get the response\nPAGE NOT FOUND"
+				"description": "Test wrong URL\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/createz\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"}\n \nthen\nPAGE NOT FOUND"
 			},
 			"response": []
 		},
@@ -513,7 +537,7 @@
 						"create"
 					]
 				},
-				"description": "Test invalid body not json\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"\n \nthen\ni get the response\nIntegrity constraint violation: 1048 Column 'employee_name' cannot be null"
+				"description": "Test invalid body not json\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"PB\",\n \"age\": \"40\",\n \"salary\": \"82863\"\n \nthen\n\tIntegrity constraint violation: 1048 Column 'employee_name' cannot be null"
 			},
 			"response": []
 		},
@@ -540,7 +564,7 @@
 						"create"
 					]
 				},
-				"description": "name is int\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 73,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"73\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76201\"}"
+				"description": "Test name is type int\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 73,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n\t{\"name\":\"73\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76201\"}"
 			},
 			"response": []
 		},
@@ -567,7 +591,7 @@
 						"create"
 					]
 				},
-				"description": "name is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": true,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"1\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76229\"}"
+				"description": "Tests name is type bool\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": true,\n \"salary\":\"69420\",\n \"age\": \"32\"}\n \nthen\n\t{\"name\":\"1\",\"salary\":\"69420\",\"age\":\"32\",\"id\":\"76229\"}"
 			},
 			"response": []
 		},
@@ -594,7 +618,7 @@
 						"create"
 					]
 				},
-				"description": "salary is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 76,\n \"salary\": false,\n \"age\": \"32\"}\n \nthen\ni get the response\n{\"name\":\"76\",\"salary\":\"\",\"age\":\"32\",\"id\":\"76274\"}"
+				"description": "salary is type bool\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 76,\n \"salary\": false,\n \"age\": \"32\"}\n \nthen\n\t{\"name\":\"76\",\"salary\":\"\",\"age\":\"32\",\"id\":\"76274\"}"
 			},
 			"response": []
 		},
@@ -621,7 +645,7 @@
 						"create"
 					]
 				},
-				"description": "age is bool\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 77,\n \"salary\": true,\n \"age\": false}\n \nthen\ni get the response\n{\"name\":\"77\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
+				"description": "Tests age is type bool\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": 77,\n \"salary\": true,\n \"age\": false}\n \nthen\n\t{\"name\":\"77\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
 			},
 			"response": []
 		},
@@ -648,7 +672,7 @@
 						"create"
 					]
 				},
-				"description": "array is accepted\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": [79,80],\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\n{\"name\":\"Array\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
+				"description": "Tests type array is accepted\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": [79,80],\n \"salary\": false,\n \"age\": false}\n \nthen\n\t{\"name\":\"Array\",\"salary\":\"\",\"age\":\"\",\"id\":\"76299\"}"
 			},
 			"response": []
 		},
@@ -675,7 +699,7 @@
 						"create"
 					]
 				},
-				"description": "object is accepted\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": {\"name\":80,\n\t\t\"salary\":false,\n\t\t\"age\":false},\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\nstatus code 520 Uknown HTTP status\n"
+				"description": "Tests object type is accepted\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": {\"name\":80,\n\t\t\"salary\":false,\n\t\t\"age\":false},\n \"salary\": false,\n \"age\": false}\n \nthen\n\tstatus code 520 Uknown HTTP status\n"
 			},
 			"response": []
 		},
@@ -702,7 +726,7 @@
 						"create"
 					]
 				},
-				"description": "null is name\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": null,\n \"salary\": false,\n \"age\": false}\n \nthen\ni get the response\nIntegrity constraint violation: 1048 Column 'employee_name' cannot be null}\n"
+				"description": "Type null is name\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": null,\n \"salary\": false,\n \"age\": false}\n \nthen\n\tIntegrity constraint violation: 1048 Column 'employee_name' cannot be null}\n"
 			},
 			"response": []
 		},
@@ -732,7 +756,7 @@
 						"create"
 					]
 				},
-				"description": "Get with correct post\n\nGiven\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": Marceline,\n \"salary\": \"souls\",\n \"age\": \"2030\"}\n \nthen\ni get the response\nMethod not allowed. Must be one of: POST"
+				"description": "Tests POST\n\nGiven\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": Marceline,\n \"salary\": \"souls\",\n \"age\": \"2030\"}\n \nthen\ni get the response\nMethod not allowed. Must be one of: POST"
 			},
 			"response": []
 		},
@@ -759,7 +783,7 @@
 						"create"
 					]
 				},
-				"description": "Creates profile with picture\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Marceline\",\n \"salary\": \"souls\",\n \"age\": \"10000\",\n \"image\":\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a7d01285-80eb-4ae1-87e1-fb0dea734617/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png/v1/fill/w_1600,h_1163,q_75,strp/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\"}\n \nthen\ni get the response\n{\"name\":\"Marceline\",\"salary\":\"souls\",\"age\":\"10000\",\"image\":\"https:\\/\\/images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com\\/f\\/a7d01285-80eb-4ae1-87e1-fb0dea734617\\/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png\\/v1\\/fill\\/w_1600,h_1163,q_75,strp\\/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\",\"id\":\"79314\"}\n"
+				"description": "Creates profile with picture\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Marceline\",\n \"salary\": \"souls\",\n \"age\": \"10000\",\n \"image\":\"https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a7d01285-80eb-4ae1-87e1-fb0dea734617/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png/v1/fill/w_1600,h_1163,q_75,strp/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\"}\n \nthen\n\t{\"name\":\"Marceline\",\"salary\":\"souls\",\"age\":\"10000\",\"image\":\"https:\\/\\/images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com\\/f\\/a7d01285-80eb-4ae1-87e1-fb0dea734617\\/d3radw7-9ac412f4-45d7-4010-97e0-56cf04f9d4c4.png\\/v1\\/fill\\/w_1600,h_1163,q_75,strp\\/marceline_flying_bass_by_callmerabbitz-d3radw7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9hN2QwMTI4NS04MGViLTRhZTEtODdlMS1mYjBkZWE3MzQ2MTcvZDNyYWR3Ny05YWM0MTJmNC00NWQ3LTQwMTAtOTdlMC01NmNmMDRmOWQ0YzQucG5nIiwid2lkdGgiOiI8PTE2MDAiLCJoZWlnaHQiOiI8PTExNjMifV1dfQ.k0QPf6czPk5ZRJoDHD-1VUV8Ep7TcnNAbLADsLaDHAY\",\"id\":\"79314\"}\n"
 			},
 			"response": []
 		},
@@ -790,7 +814,7 @@
 						"79314"
 					]
 				},
-				"description": "Verifies profile was created without picture profile \n\nGiven DummyGetCreate_19 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/79314\" with body \n\n \nthen\ni get the response\n{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
+				"description": "Verifies profile was created without picture profile \n\nGiven \n\tDummyGetCreate_19 ran successfully\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/employee/79314\" with body \n\n \nthen\n\t{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
 			},
 			"response": []
 		},
@@ -817,7 +841,7 @@
 						"create"
 					]
 				},
-				"description": "Creates profile with extra field\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Rainicorn\",\n \"salary\": \"colours\",\n \"age\": \"endless\",\n \"attributes\": \"slim\"}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+				"description": "Tests creates profile with extra field\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"Rainicorn\",\n \"salary\": \"colours\",\n \"age\": \"endless\",\n \"attributes\": \"slim\"}\n \nthen\n\t{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
 			},
 			"response": []
 		},
@@ -848,7 +872,7 @@
 						"79402"
 					]
 				},
-				"description": "Verifies profile with extra field is created\n\nGiven DummyGetCreate_20 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/79402\" with body \n\n \nthen\ni get the response\n{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
+				"description": "Verifies profile with extra field is created\n\nGiven \n\tDummyGetCreate_20 ran successfully\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/employee/79402\"  \n\n \nthen\n\t{\"id\":\"79314\",\"employee_name\":\"Marceline\",\"employee_salary\":\"0\",\"employee_age\":\"10000\",\"profile_image\":\"\"}\n"
 			},
 			"response": []
 		},
@@ -875,7 +899,7 @@
 						"create"
 					]
 				},
-				"description": "Age is empty\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\"}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+				"description": "Tests Age is empty\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\"}\n \nthen\n\t{\"error\":{\"text\":SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'employee_age' cannot be null}}"
 			},
 			"response": []
 		},
@@ -902,7 +926,7 @@
 						"create"
 					]
 				},
-				"description": "Age is null\n\nGiven\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\",\n\t\"age\": null\n}\n \nthen\ni get the response\n{\"name\":\"Rainicorn\",\"salary\":\"colours\",\"age\":\"endless\",\"attributes\":\"slim\",\"id\":\"79402\"}"
+				"description": "Tests Age is null\n\nGiven\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/create\" with body \n{\"name\": \"corn\",\n \"salary\": \"yellow\",\n\t\"age\": null\n}\n \nthen\n\t{\"name\":\"corn\",\"salary\":\"yellow\",\"age\":\"\",\"id\":\"95390\"}"
 			},
 			"response": []
 		},
@@ -930,7 +954,7 @@
 						"76649"
 					]
 				},
-				"description": "Creates employee with put \n\nGiven\nid exists\n\nwhen \nPOST \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n{\"name\": \"Buns\",\n \"salary\": 2,\n \"age\": \"ripe\"}\n \nthen\ni get the response\n{\"name\":\"Buns\",\"salary\":\"2\",\"age\":\"ripe\"}"
+				"description": "Tests update employee with put \n\nGiven\n\tid exists\n\nwhen \n\tPOST \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n{\"name\": \"Buns\",\n \"salary\": 2,\n \"age\": \"ripe\"}\n \nthen\n\t{\"name\":\"Buns\",\"salary\":\"2\",\"age\":\"ripe\"}"
 			},
 			"response": []
 		},
@@ -961,7 +985,7 @@
 						"76649"
 					]
 				},
-				"description": "Verifies employee is updated\n\nGiven\nDummyPutUpdate_1 ran successfully\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n\n \nthen\ni get the response\n{\"id\":\"76649\",\"employee_name\":\"Buns\",\"employee_salary\":\"2\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+				"description": "validates employee is updated\n\nGiven\n\tDummyPutUpdate_1 ran successfully\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/update/76649\" with body \n\n \nthen\n\t{\"id\":\"76649\",\"employee_name\":\"Buns\",\"employee_salary\":\"2\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -985,7 +1009,7 @@
 						"1"
 					]
 				},
-				"description": "Gets first employee\n\nGiven\n\nWhen \nsnd GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\nthen get the response\n{\"id\":\"1\",\"employee_name\":\"ada\",\"employee_salary\":\"1236\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+				"description": "Test Gets first employee and establishes control over body data\n\nGiven\n\nWhen \n\tsend GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\nthen \n\t{\"id\":\"1\",\"employee_name\":\"ada\",\"employee_salary\":\"1236\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -1013,7 +1037,7 @@
 						"1"
 					]
 				},
-				"description": "Updates first emplyee\n\nGiven\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}\n\nthen get the response\n{\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}"
+				"description": "Tests Updates first employee\n\nGiven\n\nWhen \n\tPUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}\n\nthen\n\t{\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\"}"
 			},
 			"response": []
 		},
@@ -1044,7 +1068,7 @@
 						"1"
 					]
 				},
-				"description": "Updates first emplyee\n\nGiven DummyPutUpdate_2.1 ran successfully\n\nWhen \nsend GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\n\nthen get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"0\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
+				"description": "Validates put\n\nGiven \n\tDummyPutUpdate_2.1 ran successfully\n\nWhen \n\tsend GET with \"http://dummy.restapiexample.com/api/v1/employee/1\"\n\n\nthen\n\t{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"0\",\"employee_age\":\"0\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -1072,7 +1096,7 @@
 						"1"
 					]
 				},
-				"description": "Updates first employee\n\nGiven DummyPutUpdate_2.2 ran successfuly\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\", \"id\":\"69420\"}\n\nthen get the response\n{\"error\":{\"text\":SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key\n'employee_name_unique'}}"
+				"description": "Tests Updates first employee with id\n\nGiven \n\tDummyPutUpdate_2.2 ran successfuly\n\nWhen \n\tsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/1\"\nwith {\"name\":\"PB\",\"salary\":\"science\",\"age\":\"math\", \"id\":\"69420\"}\n\nthen \n\t{\"error\":{\"text\":SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '' for key\n'employee_name_unique'}}"
 			},
 			"response": []
 		},
@@ -1100,7 +1124,7 @@
 						"bacon"
 					]
 				},
-				"description": "Updates creates bacon id\n\nGiven\n\nWhen \nsnd PUT with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\nwith {\"name\":\"Bacon\",\"salary\":\"crispy\",\"age\":\"salt\"}\n\nthen get the response\nMethod not allowed. Must be one of: GET\n"
+				"description": "Tests update made on id\n\nGiven\n\nWhen \n\tPUT with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\nwith {\"name\":\"Bacon\",\"salary\":\"crispy\",\"age\":\"salt\"}\n\nthen \n\tMethod not allowed. Must be one of: GET\n"
 			},
 			"response": []
 		},
@@ -1131,7 +1155,7 @@
 						"bacon"
 					]
 				},
-				"description": "Gets bacon id\n\nGiven DummyPutUpdate_3 ran successfuly\n\nWhen \nsend GET with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\n\n\nthen get the response\n{\"error\":{\"text\":SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bacon' in 'where clause'}"
+				"description": "Tests validation of wrong id\n\nGiven\n\tDummyPutUpdate_3 ran successfuly\n\nWhen \n\tsend GET with \"http://dummy.restapiexample.com/api/v1/employee/bacon\"\n\n\nthen \n\t{\"error\":{\"text\":SQLSTATE[42S22]: Column not found: 1054 Unknown column 'bacon' in 'where clause'}"
 			},
 			"response": []
 		},
@@ -1159,7 +1183,7 @@
 						"1"
 					]
 				},
-				"description": "Updates first employee with put method and populates profile picture\n\nGiven\n\n\nwhen \nPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": -80000,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\ni get the response\n{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"profile_image\":\"https:\\/\\/theicekingisapatoot.files.wordpress.com\\/2013\\/03\\/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n"
+				"description": "Updates first employee with put method and populates profile picture\n\nGiven\n\n\nwhen \n\tPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": -80000,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\n\t{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"profile_image\":\"https:\\/\\/theicekingisapatoot.files.wordpress.com\\/2013\\/03\\/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n"
 			},
 			"response": []
 		},
@@ -1190,7 +1214,7 @@
 						"1"
 					]
 				},
-				"description": "Get first employee\n\nGiven DummyPutUpdate_4 ran successfully\n\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\ni get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"-80000\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
+				"description": "Validates put of profile picture\n\nGiven \n\tDummyPutUpdate_4 ran successfully\n\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"profile_image\":\"https://theicekingisapatoot.files.wordpress.com/2013/03/a_kiss_from_princess_bubblegum_by_sircinnamon-d4pnkcd.png\"}\n \nthen\t\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"-80000\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -1218,7 +1242,7 @@
 						"1"
 					]
 				},
-				"description": "Updates first employee with extra field\n\nGiven\n\n\nwhen \nPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"bubble\":\"gum\"}\n \nthen\ni get the response\n{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"bubble\":\"gum\"}\n"
+				"description": "Tests Updates first employee with extra field\n\nGiven\n\n\nwhen \n\tPUT \"http://dummy.restapiexample.com/api/v1/update/1\" with body \n{\"name\": \"PB\",\n \"salary\": 1,\n \"age\": 1,\n \"bubble\":\"gum\"}\n \nthen\n\t{\"name\":\"PB\",\"salary\":\"1\",\"age\":\"1\",\"bubble\":\"gum\"}\n"
 			},
 			"response": []
 		},
@@ -1249,7 +1273,7 @@
 						"1"
 					]
 				},
-				"description": "Get first employee with extra field\n\nGiven DummyPutUpdate_6 ran successfully\n\n\nwhen \nGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n\n \nthen\ni get the response\n{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"1\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
+				"description": "Tests Get first employee with extra field\n\nGiven \n\tDummyPutUpdate_6 ran successfully\n\n\nwhen \n\tGET \"http://dummy.restapiexample.com/api/v1/employee/1\" with body \n\n \nthen\n\t{\"id\":\"1\",\"employee_name\":\"PB\",\"employee_salary\":\"1\",\"employee_age\":\"1\",\"profile_image\":\"\"}"
 			},
 			"response": []
 		},
@@ -1273,7 +1297,7 @@
 						"*"
 					]
 				},
-				"description": "Deletes all employees\n\nGiven \n\n\nWhen \nDELETE with http://dummy.restapiexample.com/api/v1/delete/*\n\nthen\nreceives response\n\"success\":{\"text\":\"successfully! deleted Records\"}}"
+				"description": "Tests Deletes all employees\n\nGiven \n\n\nWhen \n\tDELETE with http://dummy.restapiexample.com/api/v1/delete/*\n\nthen\n\t\"success\":{\"text\":\"successfully! deleted Records\"}}"
 			},
 			"response": []
 		},
@@ -1296,7 +1320,7 @@
 						"employees"
 					]
 				},
-				"description": "Gets All employees\n\nGiven DummyDeleteEmployees_1 ran successfully\n\nWhen\nGET with \"http://dummy.restapiexample.com/api/v1/employees\"\n\nThen\nJson with all employees\n"
+				"description": "Validates deletion\n\nGiven \n\tDummyDeleteEmployees_1 ran successfully\n\nWhen\n\tGET with \"http://dummy.restapiexample.com/api/v1/employees\"\n\nThen\n\tJson with all employees\n"
 			},
 			"response": []
 		},
@@ -1320,7 +1344,7 @@
 						"79402"
 					]
 				},
-				"description": "Gets info of Deletes single Employee\n\nGiven \nDummyGetCreate_20 ran successfuly\n\n\nWhen \nDELETE with http://dummy.restapiexample.com/api/v1/delete/79402\n\nthen\nreceives response\n\"success\":{\"text\":\"successfully! deleted Records\"}}"
+				"description": "Tests delete of invalid id\n\nGiven \n\tInvalid id (no body)\n\nWhen \n\tDELETE with http://dummy.restapiexample.com/api/v1/delete/79402\n\nthen\n\t\"success\":{\"text\":\"successfully! deleted Records\"}}"
 			},
 			"response": []
 		},
@@ -1344,7 +1368,7 @@
 						"79402"
 					]
 				},
-				"description": "Gets deleted employee\n\nGiven DummyDeleteEmployee_1 ran successfully\n\nWhen\nGET with \"http://dummy.restapiexample.com/api/v1/employee/79402\"\n\nThen\nfalse\n"
+				"description": "Gets deleted employee\n\nGiven \n\tDummyDeleteEmployee_1 ran successfully\n\nWhen\n\tGET with \"http://dummy.restapiexample.com/api/v1/employee/79402\"\n\nThen\n\tfalse\n"
 			},
 			"response": []
 		}
