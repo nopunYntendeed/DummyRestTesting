@@ -4,6 +4,7 @@ import io.restassured.response.ValidatableResponse;
 
 public class Employee_Info {
     private String name;
+    private Integer name_int;
     private String salary;
     private String age;
     private String picture;
@@ -13,6 +14,9 @@ public class Employee_Info {
     public void set_name(String employee_name){
         this.name = employee_name;
     }
+    public void set_name_int(int name_int) {
+        this.name = String.valueOf(name_int);
+	}
     public void set_salary(String employee_salary){
         this.salary = employee_salary;
     }
@@ -30,6 +34,9 @@ public class Employee_Info {
     }
     public String getName () {
         return name;    
+    }
+    public Integer getName_int () {
+        return name_int;    
     }
     public String getSalary () {
         return salary;    
@@ -49,4 +56,5 @@ public class Employee_Info {
 	public void set_id(String id) {
         this.id  = id;
 	}
+
 }

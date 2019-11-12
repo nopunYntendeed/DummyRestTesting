@@ -3,7 +3,7 @@ import org.junit.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
+
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.*;
@@ -438,6 +438,63 @@ public class TestRest {
             body(containsString("error"));
 
     }
+    /**
+     * Wrong body structure missing {}
+     */
+    @Test 
+    public void DummyPostCreate_10(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("97046");
+        person.set_name("Thorfinn");
+        person.set_age("43434");
+        person.set_salary("95457046");
+        person.set_picture("Ht");
+        person.set_rng("createz");
+
+        
+
+        new utils().OpsSimplePOST(person).then().
+        assertThat().
+            statusCode(404).and().
+            body(containsString("error"));
+
+    }
+    
+     /**
+     * Asserts int type in name
+     */
+    @Test 
+    public void DummyPostCreate_11(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("9638652");
+        person.set_name_int(8765);
+        person.set_age("43434");
+        person.set_salary("30 in dog years");
+        person.set_picture("Ht");
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+            body("name", equalTo("8765"))
+            .and().body("age", equalTo("43434"))
+            .and().body("id", not(equalTo("9638652")))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("30 in dog years"));
+    }
+    @Test
+    public void DummyPostCreate_11_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("97125");//id returned from previous test
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("8765"))
+        .and().body("employee_age", equalTo("43434"))
+        .and().body("profile_picture", equalTo(null))
+        .and().body("employee_salary", equalTo("30"));
+    }
+    
     /**
      * 
      */
