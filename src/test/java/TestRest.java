@@ -85,7 +85,7 @@ public class TestRest {
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
-             body(containsString("error")).log();
+             body(containsString("error"));
 
     }
     /**
@@ -112,6 +112,91 @@ public class TestRest {
 
     }
     /**
+     * Asserts error because duplication of name
+     */
+    @Test 
+    public void DummyPostCreate_2_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("kek");
+        person.set_salary("10000");
+        person.set_age("13");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+            body(containsString("Integrity constraint violation: 1062"));
+
+    }
+     /**
+     * Asserts GET can send body 
+     * and
+     * asserts GET created employee of DummyPostCreate_2
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_2_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("Noheck");
+        person.set_id("95923");
+ 
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             body("employee_name", equalTo("kek"))
+             .and().body("employee_salary", equalTo("10000"))
+             .and().body("employee_age", equalTo("13"));
+
+    }
+    /**
+     * Asserts DELETE can send body 
+     * and
+     * asserts DELETE
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_2_3(){
+    }
+    /**
+     * Confirms DELETE with GET method
+     */
+    @Test 
+    public void DummyPostCreate_2_4(){
+
+    }
+    /**
+     * Confirms POST Create cant submit with empty salary
+     */
+    @Test 
+    public void DummyPostCreate_3(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("other");
+        person.set_age("13");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+            body(containsString("error"));
+    }
+     /**
+     * Confirms POST Create cant submit with empty age
+     */
+    @Test 
+    public void DummyPostCreate_3_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("other1");
+        person.set_salary("13");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+            body(containsString("error"));
+    }
+    /**
      * 
      */
     @Test
@@ -130,6 +215,67 @@ public class TestRest {
                 .and().body("salary", equalTo("-99"))
                 .and().body("age", equalTo("-30"))
                 .and().body("profile_image", equalTo(""));
+    }
+    /**
+     * asserts ints in name
+     */
+    @Test 
+    public void DummyPostCreate_4(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("kek93760");
+        person.set_salary("10000");
+        person.set_age("13");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+            body("name", equalTo("kek93760"))
+            .and().body("salary", equalTo("10000"))
+            .and().body("age", equalTo("13"));
+
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+    }
+     /**
+     * asserts wierd chars in name
+     */
+    @Test 
+    public void DummyPostCreate_5(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("ºçç+*ł#$%&/()");
+        person.set_salary("10000");
+        person.set_age("13");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+            body("name", equalTo("ºçç+*ł#$%&/()"))
+            .and().body("salary", equalTo("10000"))
+            .and().body("age", equalTo("13"));
+
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+    }
+     /**
+     * Confirmation of previous test
+     */
+    @Test 
+    public void DummyPostCreate_5_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("95950");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", not(equalTo("ºçç+*ł#$%&/()")))
+            .and().body("employee_salary", equalTo("10000"))
+            .and().body("employee_age", equalTo("13"));
     }
 
 
