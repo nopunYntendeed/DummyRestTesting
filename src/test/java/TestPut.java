@@ -1,15 +1,22 @@
 
-
 import org.junit.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import junit.framework.Assert;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.containsString;
 
 import utils.utils;
 import utils.Employee_Info;
+import io.restassured.path.json.JsonPath;
 
+import java.util.HashMap;
+import java.util.List;
 
 public class TestPut {
 
@@ -19,7 +26,7 @@ public class TestPut {
         person.set_name("Jasus");
         person.set_salary("-99");
         person.set_age("-30");
-        person.set_id("95728");
+        person.set_id("1");
 
         new utils().PUTOpsWithBodyAndPathParams(person).
         then().
@@ -27,7 +34,7 @@ public class TestPut {
                 statusCode(200).and().
                 body("name", equalTo("Jasus"))
                 .and().body("salary", equalTo("-99"))
-                .and().body("age", equalTo("-30")).log().all()
+                .and().body("age", equalTo("-30"))
                 .and().body("profile_image", equalTo(""));
     }
     @Test 
@@ -69,6 +76,28 @@ public class TestPut {
         assertThat().
             statusCode(200)
             .and().body(containsString("false"));
+    }
+    /**
+     * Asserts Get
+     * 
+     * 
+     */
+    @Test
+    public void DummyGetAll(){
+        
+        String jsonendpoint= "http://dummy.restapiexample.com/api/v1/employees";
+
+        Response response = RestAssured.given().
+        when().
+        get(jsonendpoint).
+        andReturn();
+
+        JsonPath jsonPath = new JsonPath(response.body().asString());       
+        // multiple matches returned in an ArrayList
+        List<HashMap<String,String>> ret = jsonPath.get("id");
+
+        assertThat(ret.size(), is(not(3)));
+        
     }
 
 }
