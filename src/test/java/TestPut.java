@@ -30,6 +30,7 @@ public class TestPut {
     //     new utils().PUTOpsWithBodyAndPathParams(person).
     //     then().
     //     assertThat().
+    //             statusCode(200).and().
     //             body("name", equalTo("Killa"))
     //             .and().body("salary", equalTo("-99"))
     //             .and().body("age", equalTo("-30"));
@@ -44,24 +45,33 @@ public class TestPut {
 
     //     new utils().POSTOpsWithBodyParams(person).then().
     //     assertThat().
+    //          statusCode(200).and().
     //         body("name", equalTo("Somebody"))
     //         .and().body("salary", equalTo("-99"))
     //         .and().body("age", equalTo("-73"));
 
     // }
     @Test 
-    public void DummyGetCreate(){
+    public void DummyGetSingle(){
         Employee_Info person = new Employee_Info();
-        person.set_name("Somebody");
-        person.set_salary("-99");
-        person.set_age("-73");
+        person.set_id("1");
 
-
-        new utils().POSTOpsWithBodyParams(person).then().
+        new utils().GETOpsBodyParams(person).then().
         assertThat().
-            body("name", equalTo("Somebody"))
-            .and().body("salary", equalTo("-99"))
-            .and().body("age", equalTo("-73"));
+            statusCode(200).and().
+            body("employee_name", equalTo("Archer"))
+            .and().body("employee_salary", equalTo("10"))
+            .and().body("id", equalTo("1"))
+            .and().body("profile_image", equalTo(""))
+            .and().body("employee_age", equalTo("30"));
+
+        
+        
+        // new utils().(person).then().
+        // assertThat().
+        //     body("name", equalTo("Somebody"))
+        //     .and().body("salary", equalTo("-99"))
+        //     .and().body("age", equalTo("-73"));
 
     }
 

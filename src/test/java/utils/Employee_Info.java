@@ -20,6 +20,12 @@ public class Employee_Info {
     public void set_id(String id){
         this.id = id;
     }
+    public void set_picture(String picture){
+        this.picture = picture;
+    }
+    public void set_rng(String rng){
+        this.rng = rng;
+    }
     public String getName () {
         return name;    
     }
@@ -31,5 +37,11 @@ public class Employee_Info {
     }
     public String getId () {
         return id;    
+    }
+    public String getPicture () {
+        return picture;    
+    }
+    public String getRng () {
+        return rng;    
     }
 }
