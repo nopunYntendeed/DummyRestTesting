@@ -239,34 +239,36 @@ public class TestRest{
 
 
     // }
+
+    class Employee_User {
+        private String employee_name;
+        private String employee_salary;
+        private String employee_age;
+        private String employee_picture;
+        private String employee_rng;
+
+        public void set_name(String employee_name){
+            this.employee_name = employee_name;
+        }
+        public void set_salary(String employee_salary){
+            this.employee_salary = employee_salary;
+        }
+        public void set_age(String employee_age){
+            this.employee_age = employee_age;
+        }
+        public String getId () {
+            return employee_name;    
+        }
+        public String getSalary () {
+            return employee_salary;    
+        }
+        public String getAge () {
+            return employee_age;    
+        }
+    }
     @Test 
     public void postClassTry5(){
-        class Employee_User {
-            private String employee_name;
-            private String employee_salary;
-            private String employee_age;
-            private String employee_picture;
-            private String employee_rng;
-
-            public void set_name(String employee_name){
-                this.employee_name = employee_name;
-            }
-            public void set_salary(String employee_salary){
-                this.employee_salary = employee_salary;
-            }
-            public void set_age(String employee_age){
-                this.employee_age = employee_age;
-            }
-            public String getId () {
-                return employee_name;    
-            }
-            public String getSalary () {
-                return employee_salary;    
-            }
-            public String getAge () {
-                return employee_age;    
-            }
-        }
+       
         Employee_User user = new Employee_User();
 		user.set_name("Marceline");
 		user.set_age("10000");
