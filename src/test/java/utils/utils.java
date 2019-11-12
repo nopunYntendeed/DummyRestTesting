@@ -31,9 +31,21 @@ public class utils{
         JsonObject json_body = (JsonObject) new Gson().toJsonTree(person);
         json_body.remove("id");
         String string_json_body = json_body.toString();
-        
-
         Request.body(string_json_body);
         return Request.put();
+    }
+    public Response POSTOpsWithBodyParams(Employee_Info person){
+
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.setBaseUri("http://dummy.restapiexample.com/api/v1/create");
+        builder.setContentType(ContentType.JSON);
+        var requestSpec = builder.build();
+        Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
+
+        JsonObject json_body = (JsonObject) new Gson().toJsonTree(person);
+        String string_json_body = json_body.toString();
+        Request.body(string_json_body);
+        return Request.post();
+
     }
 }

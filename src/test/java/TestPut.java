@@ -19,28 +19,49 @@ import utils.Employee_Info;
 
 public class TestPut {
 
-    @Test
-    public void DummyPutUpdate() {
-        Employee_Info person = new Employee_Info();
-        person.set_name("Tres");
-        person.set_salary("-99");
-        person.set_age("-30");
-        person.set_id("95728");
+    // @Test
+    // public void DummyPutUpdate() {
+    //     Employee_Info person = new Employee_Info();
+    //     person.set_name("Tres");
+    //     person.set_salary("-99");
+    //     person.set_age("-30");
+    //     person.set_id("95728");
 
-        new utils().PUTOpsWithBodyAndPathParams(person).
-        then().
-        assertThat().
-                body("name", equalTo("Killa"))
-                .and().body("salary", equalTo("-99"))
-                .and().body("age", equalTo("-30"));
-    }
+    //     new utils().PUTOpsWithBodyAndPathParams(person).
+    //     then().
+    //     assertThat().
+    //             body("name", equalTo("Killa"))
+    //             .and().body("salary", equalTo("-99"))
+    //             .and().body("age", equalTo("-30"));
+    // }
+    // @Test 
+    // public void DummyPostCreate(){
+    //     Employee_Info person = new Employee_Info();
+    //     person.set_name("Somebody");
+    //     person.set_salary("-99");
+    //     person.set_age("-73");
+
+
+    //     new utils().POSTOpsWithBodyParams(person).then().
+    //     assertThat().
+    //         body("name", equalTo("Somebody"))
+    //         .and().body("salary", equalTo("-99"))
+    //         .and().body("age", equalTo("-73"));
+
+    // }
     @Test 
     public void DummyGetCreate(){
         Employee_Info person = new Employee_Info();
-        person.set_name("Tres");
+        person.set_name("Somebody");
         person.set_salary("-99");
-        person.set_age("-30");
-        person.set_id("95728");
+        person.set_age("-73");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            body("name", equalTo("Somebody"))
+            .and().body("salary", equalTo("-99"))
+            .and().body("age", equalTo("-73"));
 
     }
 
