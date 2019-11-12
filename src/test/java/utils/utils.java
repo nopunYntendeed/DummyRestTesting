@@ -77,4 +77,27 @@ public class utils{
         }
         else throw new IllegalStateException("Unresponsive URL");
     }
+       /* @Test
+    String deleteEmployee = "http://dummy.restapiexample.com/api/v1/delete/";
+    public void clearsAllEmployees(){
+
+        RestAssured.filters(FORCE_JSON_RESPONSE_BODY);
+
+    // or per request
+         List<Map<String,String>> bodyjson = RestAssured
+        .given()
+        .filters(FORCE_JSON_RESPONSE_BODY)
+        .get(jsonendpoint)
+        .jsonPath()
+        .<List<Map<String,String>>>get();
+
+        for (Map<String,String> el: bodyjson){
+            String id = el.get("id");
+            RestAssured
+            .delete(deleteEmployee + id);
+
+        }
+        Assert.error("uma string qualquer uma mensagem");
+
+    }  */  
 }
