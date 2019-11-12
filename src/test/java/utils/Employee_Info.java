@@ -1,5 +1,7 @@
 package utils;
 
+import io.restassured.response.ValidatableResponse;
+
 public class Employee_Info {
     private String name;
     private String salary;
@@ -17,8 +19,8 @@ public class Employee_Info {
     public void set_age(String employee_age){
         this.age = employee_age;
     }
-    public void set_id(String id){
-        this.id = id;
+    public void set_id(ValidatableResponse validatableResponse){
+        this.id =  validatableResponse.toString();
     }
     public void set_picture(String picture){
         this.picture = picture;
@@ -44,4 +46,7 @@ public class Employee_Info {
     public String getRng () {
         return rng;    
     }
+	public void set_id(String id) {
+        this.id  = id;
+	}
 }
