@@ -64,6 +64,12 @@ public class utils{
 
         return Request.get();
     }
+
+    public Response GETbyname(Employee_Info person){
+
+
+    return Request.get();
+    }
     public Response WrongGetMethod(Employee_Info person){
 
         RequestSpecBuilder builder = new RequestSpecBuilder();

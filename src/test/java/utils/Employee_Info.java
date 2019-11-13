@@ -8,9 +8,10 @@ import java.util.List;
 import io.restassured.response.ValidatableResponse;
 
 public class Employee_Info {
-    private String name;
+    private Object name;
     private Integer name_int;
     private Boolean name_bool;
+    private Object name_obj;
     private ArrayList name_array;
     private String salary;
     private String age;
@@ -30,13 +31,15 @@ public class Employee_Info {
     public void set_name_bool(Boolean name_bool) {
         this.name = String.valueOf(name_bool);
     }
-	public void set_name_array(int i, int j) {
+
+    public void set_name_array(List<Object> name_array) {
+        this.name = name_array;
+    }
+    public void set_name_obj(Object set_name) {
+        this.name = name_obj;
 	}
-    public void set_name_array(ArrayList name_array) {
-        String res = join(",", name_array);
-        this.name = res;
-	}
-    public void set_salary(String employee_salary){
+    
+    public void set_salary(String employee_salary) {
         this.salary = employee_salary;
     }
     public void set_salary_bool(Boolean salary_bool){
@@ -60,7 +63,7 @@ public class Employee_Info {
     public void set_rng(String rng){
         this.rng = rng;
     }
-    public String getName () {
+    public Object getName () {
         return name;    
     }
     public Integer getName_int () {
@@ -87,6 +90,8 @@ public class Employee_Info {
 	public void set_id(String id) {
         this.id  = id;
 	}
+
+
 
 
 

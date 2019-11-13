@@ -19,6 +19,7 @@ import io.restassured.path.json.JsonPath;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TestRest {
 
@@ -500,11 +501,11 @@ public class TestRest {
     public void DummyPostCreate_10(){
         Employee_Info person = new Employee_Info();
         person.set_id("97046");
-        person.set_name("Thorfinn");
+        person.set_name("Thorfinn{'treotre':'fheed'}");
         person.set_age("43434");
         person.set_salary("95457046");
         person.set_picture("Ht");
-        person.set_rng("createz");
+        person.set_rng("create");
 
         
 
@@ -617,13 +618,17 @@ public class TestRest {
 
     }
     /**
-     * Asserts list type in name TODO
+     * Asserts list type in name 
      * @param List 
      */
     @Test 
     public void DummyPostCreate_15(){
         Employee_Info person = new Employee_Info();
-     //   person.set_name_array([73,42]);
+        List list = new ArrayList<>();
+
+        list.add("popcorn");
+        list.add("73");
+        person.set_name_array(list);
         person.set_salary("786");
         person.set_age_bool(false);
         person.set_picture("https://");
@@ -632,7 +637,7 @@ public class TestRest {
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("name", equalTo("wefvcd"))
+            body("name", equalTo("Array"))
             .and().body("age", equalTo("false"))
             .and().body("profile_picture", equalTo(null))
             .and().body("salary", equalTo("786"));
@@ -645,16 +650,17 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_16(){
         Employee_Info person = new Employee_Info();
-        //person.set_name_object();
+        Map<String, String> map = new HashMap<String,String>();
+        person.set_name_obj(map);
         person.set_salary("786");
         person.set_age_bool(false);
         person.set_picture("https://");
 
 
-        // new utils(). .then().
-        // assertThat().
-        //     statusCode(200).and().
-        //     body("name", equalTo("wefvcd"))
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             body(containsString("error"));
         //     .and().body("age", equalTo("false"))
         //     .and().body("profile_picture", equalTo(null))
         //     .and().body("salary", equalTo("786"));
