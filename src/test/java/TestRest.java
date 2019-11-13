@@ -1041,5 +1041,48 @@ public class TestRest {
         .and().body("employee_age", equalTo("-30"))
         .and().body("profile_picture",equalTo(null));
     }
+    /**
+     * Asserts invalid extra fields for valid employee
+     * and explore testing for salary and age
+     */
+    @Test
+    public void DummyPutUpdate_5() {
+        Employee_Info person = new Employee_Info();
+        person.set_name("Thorn.243,21'''");
+        person.set_salary("99999999999999999999999999999999999999999999999999999999999999999999999");
+        person.set_age_int(-9999999);
+        person.set_id("96700");
+        person.set_rng("random col info");
+
+
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("Thorn.243,21'''"))
+                .and().body("salary", equalTo("99999999999999999999999999999999999999999999999999999999999999999999999"))
+                .and().body("age", equalTo("-9999999"))
+                .and().body("profile_image", equalTo(null))
+                .and().body("rng", equalTo("random col info"))
+                .extract().jsonPath().getJsonObject("id");
+    }
+    /**
+     * GET command to validate previous test
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_5_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("96700");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("Thorn.243,21'''"))
+        .and().body("employee_salary", equalTo("2147483647"))
+        .and().body("employee_age", equalTo("-9999999"))
+        .and().body(not(containsString("rng")))
+        .and().body("profile_picture",equalTo(null));
+    }
 
 }
