@@ -811,33 +811,66 @@ public class TestRest {
 
     }
     /**
-     * 
+     * Asserts update name not valid if name already exists
      */
     @Test
-    public void DummyPutUpdate() {
+    public void DummyPutUpdate_1() {
         Employee_Info person = new Employee_Info();
-        person.set_name("Jasus");
-        person.set_salary("-99");
+        person.set_name("null232");
+        person.set_salary("cookie");
         person.set_age("-30");
         person.set_id("1");
 
-        String id_string = new utils().PUTOpsWithBodyAndPathParams(person).
+        new utils().PUTOpsWithBodyAndPathParams(person).
         then().
         assertThat().
                 statusCode(200).and().
-                body("name", equalTo("Jasus"))
-                .and().body("salary", equalTo("-99"))
-                .and().body("age", equalTo("-30"))
-                .and().body("profile_image", equalTo(""))
-                .extract().jsonPath().getJsonObject("id");
-
-            
-                person.set_id(id_string);
-                String id = person.getId();
-                System.out.println("Id of employee created: "+id);
+                body(containsString("error"));
     }
 
 
+    /**
+     * Asserts update name correct
+     */
+    @Test
+    public void DummyPutUpdate_1_1() {
+        Employee_Info person = new Employee_Info();
+        person.set_name("driving");
+        person.set_salary("cookie");
+        person.set_age("-30");
+        person.set_id("1");
 
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("driving"))
+                .and().body("salary", equalTo("cookie"))
+                .and().body("age", equalTo("-30"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+
+            
+                // person.set_id(id_string);
+                // String id = person.getId();
+                // System.out.println("Id of employee created: "+id);
+    }
+    /**
+     * Confirms creation of previous test
+     * 
+     */
+    @Test
+    public void DummyPostCreate_1_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("1");//id returned from previous test
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("driving"))
+        .and().body("employee_age", equalTo("-30"))
+        .and().body("profile_picture", equalTo(null))
+        .and().body("employee_salary", equalTo("0"));
+    }
 
 }
