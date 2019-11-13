@@ -481,7 +481,7 @@ public class TestRest {
 
     }
     /**
-     * Wrong body structure missing {}
+     * Wrong body structure missing {} TODO
      */
     @Test 
     public void DummyPostCreate_10(){
@@ -523,6 +523,10 @@ public class TestRest {
             .and().body("profile_picture", equalTo(null))
             .and().body("salary", equalTo("30 in dog years"));
     }
+    /**
+     * Confirms creation of previous test
+     * 
+     */
     @Test
     public void DummyPostCreate_11_1(){
         Employee_Info person = new Employee_Info();
@@ -747,7 +751,7 @@ public class TestRest {
 
     }
     /**
-     * confirms previous test TODO GIVES ERROR NAME OR SERVICE NOT KNOW
+     * confirms previous test 
      */
     @Test 
     public void DummyPostCreate_20_1(){
@@ -764,6 +768,46 @@ public class TestRest {
             .and().body("profile_picture", equalTo(null))
             .and().body("employee_salary", equalTo("-786"))
             .and().body(not(containsString("rng")));
+
+    }
+
+     /**
+     * asserts Age input with null
+     */
+    @Test 
+    public void DummyPostCreate_21(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("null");
+        person.set_age("13");
+        person.set_picture("");
+        person.set_salary("233fff21212");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             body(containsString("error"));
+
+    }
+    /**
+     * asserts age input with ""
+     */
+    @Test 
+    public void DummyPostCreate_21_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("null232");
+        person.set_age("''");
+        person.set_picture("");
+        person.set_salary("233fff21212");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             body("name",equalTo("null232")).and().
+             body("age",equalTo("''")).and().
+             body("salary",equalTo("233fff21212")).and().
+             body("profile_picture",equalTo(null));
 
     }
     /**
