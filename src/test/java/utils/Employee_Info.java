@@ -14,6 +14,7 @@ public class Employee_Info {
     private ArrayList name_array;
     private String salary;
     private String age;
+    private Integer age_int;
     private String picture;
     private String rng;
     private String id;
@@ -43,6 +44,9 @@ public class Employee_Info {
     }
     public void set_age(String employee_age){
         this.age = employee_age;
+    }
+    public void set_age_int(int age_int){
+        this.age = String.valueOf(age_int);
     }
     public void set_age_bool(Boolean age_bool){
         this.age = String.valueOf(age_bool);

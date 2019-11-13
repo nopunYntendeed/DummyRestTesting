@@ -966,6 +966,7 @@ public class TestRest {
     }
     /**
      * Asserts update id with wierd url
+     * TODO brings method 405 on postman
      */
     @Test
     public void DummyPutUpdate_3() {
@@ -999,6 +1000,46 @@ public class TestRest {
         assertThat().
         statusCode(200).and().
         body(containsString("error"));
+    }
+     /**
+     * Asserts invalid fields for valid employee
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_4() {
+        Employee_Info person = new Employee_Info();
+        person.set_name("F  4FFdw3334rfvdd1%&/()");
+        person.set_salary_bool(false);
+        person.set_age_int(-30);
+        person.set_id("96700");
+
+
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("F  4FFdw3334rfvdd1%&/()"))
+                .and().body("salary", equalTo("false"))
+                .and().body("age", equalTo("-30"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+    }
+    /**
+     * GET command to validate previous test
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_4_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("96700");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("F  4FFdw3334rfvdd1%&/()"))
+        .and().body("employee_salary", equalTo("0"))
+        .and().body("employee_age", equalTo("-30"))
+        .and().body("profile_picture",equalTo(null));
     }
 
 }
