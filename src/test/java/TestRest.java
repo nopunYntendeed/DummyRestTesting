@@ -872,5 +872,61 @@ public class TestRest {
         .and().body("profile_picture", equalTo(null))
         .and().body("employee_salary", equalTo("0"));
     }
+    /**
+     * GET command for control of valid employee
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("1");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("driving"))
+        .and().body("employee_age", equalTo("-30"))
+        .and().body("profile_picture", equalTo(null))
+        .and().body("employee_salary", equalTo("0"));
+    }
+    /**
+     * Asserts update name with negative int
+     */
+    @Test
+    public void DummyPutUpdate_2_1() {
+        Employee_Info person = new Employee_Info();
+        person.set_name_int(-73);
+        person.set_salary("rfn43kfr333'''");
+        person.set_age("-30");
+        person.set_id("1");
+        person.set_picture("ttyppssndfdofnofU$%&/()=NEOF4FI4NFOH4W89c4NU9WJE");
+
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("-73"))
+                .and().body("salary", equalTo("rfn43kfr333'''"))
+                .and().body("age", equalTo("-30"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+    }
+    /**
+     * GET command to validate previous test
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_2_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("1");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body("employee_name", equalTo("-73"))
+        .and().body("employee_age", equalTo("-30"))
+        .and().body("profile_picture", equalTo(null))
+        .and().body("employee_salary", equalTo("0"));
+    }
 
 }
