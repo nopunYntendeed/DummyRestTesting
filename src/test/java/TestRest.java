@@ -15,6 +15,7 @@ import utils.utils;
 import utils.Employee_Info;
 import io.restassured.path.json.JsonPath;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -383,7 +384,7 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_8(){
         Employee_Info person = new Employee_Info();
-        person.set_name("Troelff");
+        person.set_name("rgfvdregf");
         person.set_salary("12233");
         person.set_age("Crist");
         person.set_picture("https://");
@@ -392,7 +393,7 @@ public class TestRest {
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("name", equalTo("Troelff"))
+            body("name", equalTo("rgfvdregf"))
             .and().body("age", equalTo("Crist"))
             .and().body("profile_picture", equalTo(null))
             .and().body("salary", equalTo("12233"));
@@ -494,7 +495,132 @@ public class TestRest {
         .and().body("profile_picture", equalTo(null))
         .and().body("employee_salary", equalTo("30"));
     }
-    
+    /**
+     * Asserts bool type in name
+     */
+    @Test 
+    public void DummyPostCreate_12(){
+        Employee_Info person = new Employee_Info();
+        person.set_name_bool(false);
+        person.set_salary("12233");
+        person.set_age("Crist");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("false"))
+            .and().body("age", equalTo("Crist"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("12233"));
+
+    }
+       /**
+     * Asserts bool type in salary
+     */
+    @Test 
+    public void DummyPostCreate_13(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("wefevd");
+        person.set_salary_bool(false);
+        person.set_age("68514");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("wefevd"))
+            .and().body("age", equalTo("68514"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("false"));
+
+    }
+    /**
+     * Asserts bool type in age
+     */
+    @Test 
+    public void DummyPostCreate_14(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("wefvcd");
+        person.set_salary("786");
+        person.set_age_bool(false);
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("wefvcd"))
+            .and().body("age", equalTo("false"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("786"));
+
+    }
+    /**
+     * Asserts list type in name TODO
+     * @param List 
+     */
+    @Test 
+    public void DummyPostCreate_15(){
+        Employee_Info person = new Employee_Info();
+     //   person.set_name_array([73,42]);
+        person.set_salary("786");
+        person.set_age_bool(false);
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("wefvcd"))
+            .and().body("age", equalTo("false"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("786"));
+
+    }
+    /**
+     * Asserts Object type in name TODO
+     *  
+     */
+    @Test 
+    public void DummyPostCreate_16(){
+        Employee_Info person = new Employee_Info();
+        //person.set_name_object();
+        person.set_salary("786");
+        person.set_age_bool(false);
+        person.set_picture("https://");
+
+
+        // new utils(). .then().
+        // assertThat().
+        //     statusCode(200).and().
+        //     body("name", equalTo("wefvcd"))
+        //     .and().body("age", equalTo("false"))
+        //     .and().body("profile_picture", equalTo(null))
+        //     .and().body("salary", equalTo("786"));
+
+    }
+     /**
+     * Asserts null type in name
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_17(){
+        Employee_Info person = new Employee_Info();
+        person.set_name(null);
+        person.set_salary("786");
+        person.set_age("thr12rfr2");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body(containsString("error"));
+
+    }
     /**
      * 
      */
