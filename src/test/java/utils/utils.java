@@ -64,6 +64,20 @@ public class utils{
 
         return Request.get();
     }
+    public Response WrongGetMethod(Employee_Info person){
+
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.setBaseUri("http://dummy.restapiexample.com/api/v1/create");
+        builder.setContentType(ContentType.JSON);
+        var requestSpec = builder.build();
+        Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
+        
+        JsonObject json_body = (JsonObject) new Gson().toJsonTree(person);
+        String string_json_body = json_body.toString();
+        Request.body(string_json_body);
+
+        return Request.get();
+    }
     public Response OpsSimplePOST(Employee_Info person){
 
         RequestSpecBuilder builder = new RequestSpecBuilder();

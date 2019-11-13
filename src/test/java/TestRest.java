@@ -419,6 +419,46 @@ public class TestRest {
 
     }
     /**
+     * asserts chars in age
+     */
+    @Test 
+    public void DummyPostCreate_8_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("ergregr");
+        person.set_salary("12233");
+        person.set_age("Cr323ist1223");
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("ergregr"))
+            .and().body("age", equalTo("Cr323ist1223"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("salary", equalTo("12233"));
+
+    }
+    /**
+     * confirms previous test
+     */
+    @Test 
+    public void DummyPostCreate_8_3(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("98164");
+
+
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("employee_name", equalTo("ergregr"))
+            .and().body("employee_age", equalTo("0"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("employee_salary", equalTo("12233"));
+
+    }
+    /**
      * Asserts wrong URL
      */
     @Test 
@@ -619,6 +659,26 @@ public class TestRest {
         assertThat().
             statusCode(200).and().
             body(containsString("error"));
+
+    }
+    
+    /**
+     * Asserts wrong method error when create into post
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_18(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("fpaa95");
+        person.set_salary("786");
+        person.set_age("3232");
+        person.set_picture("https://");
+
+        
+        new utils().WrongGetMethod(person).then().
+        assertThat().
+            statusCode(405).and().
+            body(containsString("Method not allowed"));
 
     }
     /**
