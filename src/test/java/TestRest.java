@@ -928,5 +928,41 @@ public class TestRest {
         .and().body("profile_picture", equalTo(null))
         .and().body("employee_salary", equalTo("0"));
     }
+    /**
+     * Asserts update name with valid body to invalid empoyee
+     */
+    @Test
+    public void DummyPutUpdate_2_3() {
+        Employee_Info person = new Employee_Info();
+        person.set_name_int(-74);
+        person.set_salary("7080");
+        person.set_age("-30");
+        person.set_id("2");
+
+
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("-74"))
+                .and().body("salary", equalTo("7080"))
+                .and().body("age", equalTo("-30"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+    }
+    /**
+     * GET command to validate previous test
+     * 
+     */
+    @Test
+    public void DummyPutUpdate_2_4(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("2");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("false"));
+    }
 
 }
