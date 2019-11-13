@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TestRest {
 
-        /**
+    /**
      * Asserts employee /1 body
      */
     @Test 
@@ -169,12 +169,25 @@ public class TestRest {
      */
     @Test 
     public void DummyPostCreate_2_3(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("95923");
+
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
     }
     /**
      * Confirms DELETE with GET method
      */
     @Test 
     public void DummyPostCreate_2_4(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("95923");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().statusCode(200).and().
+        body(containsString("false"));
 
     }
     /**
@@ -1008,9 +1021,9 @@ public class TestRest {
     @Test
     public void DummyPutUpdate_4() {
         Employee_Info person = new Employee_Info();
-        person.set_name("F  4FFdw3334rfvdd1%&/()");
+        person.set_name("F  4FFdw3334rfvdd%&/()");
         person.set_salary_bool(false);
-        person.set_age_int(-30);
+        person.set_age("-999999999999999999999999999999999999999999999999");
         person.set_id("96700");
 
 
@@ -1018,9 +1031,9 @@ public class TestRest {
         then().
         assertThat().
                 statusCode(200).and().
-                body("name", equalTo("F  4FFdw3334rfvdd1%&/()"))
+                body("name", equalTo("F  4FFdw3334rfvdd%&/()"))
                 .and().body("salary", equalTo("false"))
-                .and().body("age", equalTo("-30"))
+                .and().body("age", equalTo("-999999999999999999999999999999999999999999999999"))
                 .and().body("profile_image", equalTo(null))
                 .extract().jsonPath().getJsonObject("id");
     }
@@ -1036,9 +1049,9 @@ public class TestRest {
         new utils().GETOpsBodyParams(person).then().
         assertThat().
         statusCode(200).and().
-        body("employee_name", equalTo("F  4FFdw3334rfvdd1%&/()"))
+        body("employee_name", equalTo("F  4FFdw3334rfvdd%&/()"))
         .and().body("employee_salary", equalTo("0"))
-        .and().body("employee_age", equalTo("-30"))
+        .and().body("employee_age", equalTo("-2147483648"))
         .and().body("profile_picture",equalTo(null));
     }
     /**
@@ -1083,6 +1096,34 @@ public class TestRest {
         .and().body("employee_age", equalTo("-9999999"))
         .and().body(not(containsString("rng")))
         .and().body("profile_picture",equalTo(null));
+    }
+    /**
+     * Asserts DELETE all with *
+     * 
+     */
+    @Test
+    public void DummyDeleteEmployees(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("*");
+
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
+    }
+    /**
+     * Asserts DELETE invalid employee
+     * 
+     */
+    @Test
+    public void DummyDeleteEmployee(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("2");
+
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
     }
 
 }

@@ -92,6 +92,14 @@ public class utils{
 
         return Request.post();
     }
+    public Response DELETE(Employee_Info person){
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.setBaseUri("http://dummy.restapiexample.com/api/v1/delete/"+person.getId());
+        builder.setContentType(ContentType.JSON);
+        var requestSpec = builder.build();
+        Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
+        return Request.delete();
+    }
 
        /* @Test
     String deleteEmployee = "http://dummy.restapiexample.com/api/v1/delete/";
