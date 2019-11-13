@@ -1,4 +1,5 @@
 
+import org.hamcrest.core.IsAnything;
 import org.junit.Test;
 
 import io.restassured.RestAssured;
@@ -720,6 +721,49 @@ public class TestRest {
             .and().body("employee_age", equalTo("-3232"))
             .and().body("profile_picture", equalTo(null))
             .and().body("employee_salary", equalTo("-786"));
+
+    }
+    /**
+     * Asserts permission of not valid fields
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_20(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("Reactsss");
+        person.set_salary("-786");
+        person.set_age("-3232");
+        person.set_picture("https://");
+        person.set_rng("kmrrng");
+        
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("Reactsss")).and().
+            body("salary", equalTo("-786")).and().
+            body("age", equalTo("-3232")).and().
+            body("profile_picture",equalTo(null)).and().
+            body("rng",equalTo("kmrrng"));
+
+    }
+    /**
+     * confirms previous test TODO GIVES ERROR NAME OR SERVICE NOT KNOW
+     */
+    @Test 
+    public void DummyPostCreate_20_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("98226");
+
+
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("employee_name", equalTo("Reactsss"))
+            .and().body("employee_age", equalTo("-3232"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("employee_salary", equalTo("-786"))
+            .and().body(not(containsString("rng")));
 
     }
     /**
