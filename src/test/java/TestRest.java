@@ -682,6 +682,47 @@ public class TestRest {
 
     }
     /**
+     * Asserts creation of profile pictue
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_19(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("MarcelineQueen");
+        person.set_salary("-786");
+        person.set_age("-3232");
+        person.set_picture("https://");
+
+        
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("MarcelineQueen")).and().
+            body("salary", equalTo("-786")).and().
+            body("age", equalTo("-3232")).and().
+            body("profile_picture",equalTo("https://"));
+
+    }
+    /**
+     * confirms previous test
+     */
+    @Test 
+    public void DummyPostCreate_19_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("98204");
+
+
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("employee_name", equalTo("MarcelineQueen"))
+            .and().body("employee_age", equalTo("-3232"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("employee_salary", equalTo("-786"));
+
+    }
+    /**
      * 
      */
     @Test
