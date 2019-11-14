@@ -63,8 +63,8 @@ public class Employee_Info {
     public void set_rng(String rng){
         this.rng = rng;
     }
-    public Object getName () {
-        return name;    
+    public String getName () {
+        return (String) name;
     }
     public Integer getName_int () {
         return name_int;    

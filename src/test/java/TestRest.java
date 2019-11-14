@@ -1,7 +1,7 @@
 
-import org.hamcrest.core.IsAnything;
 import org.junit.Test;
 
+import cucumber.api.java.en.And;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -22,7 +22,30 @@ import java.util.List;
 import java.util.Map;
 
 public class TestRest {
+    /**
+     * Tests POST Create Id doesnt set
+     */
+    @Test 
+    public void GETOpByName(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("nlrq2");
 
+ 
+        String id_string = new utils().GETbyname(person).then().
+        assertThat().
+             statusCode(200).and().
+             body("name", equalTo("nlrq2"))
+             .and().body("age", equalTo("0"))
+             .and().body("salary", equalTo("0"))
+             .and().body("profile_picture", equalTo(null))
+             .extract().jsonPath().getJsonObject("id");
+
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+    }
     /**
      * Asserts employee /1 body
      */
@@ -231,13 +254,15 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+       String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
             body("name", equalTo("kek93760"))
             .and().body("salary", equalTo("10000"))
-            .and().body("age", equalTo("13"));
-
+            .and().body("age", equalTo("13")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
 
@@ -271,13 +296,15 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
             body("name", equalTo("ºçç+*ł#$%&/()"))
             .and().body("salary", equalTo("10000"))
-            .and().body("age", equalTo("13"));
-
+            .and().body("age", equalTo("13")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
 
@@ -326,16 +353,21 @@ public class TestRest {
         person.set_salary("''");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
              body("name", equalTo("Ostra"))
              .and().body("age", equalTo("13"))
              .and().body("profile_picture", equalTo(null))
-             .and().body("salary", equalTo("''"));
+             .and().body("salary", equalTo("''")).and()
+             .extract().jsonPath().getJsonObject("id");
+            
+             person.set_id(id_string);
+             String id = person.getId();
+             System.out.println("Id of employee created: "+id);
 
     }
-         /**
+    /**
      * asserts salary input with null
      */
     @Test 
@@ -365,13 +397,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("Spl"))
             .and().body("age", equalTo("13"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("Souls"));
+            .and().body("salary", equalTo("Souls")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -405,13 +442,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("rgfvdregf"))
             .and().body("age", equalTo("Crist"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("12233"));
+            .and().body("salary", equalTo("12233")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -445,13 +487,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("ergregr"))
             .and().body("age", equalTo("Cr323ist1223"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("12233"));
+            .and().body("salary", equalTo("12233")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -528,14 +575,19 @@ public class TestRest {
         person.set_salary("30 in dog years");
         person.set_picture("Ht");
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
         statusCode(200).and().
             body("name", equalTo("8765"))
             .and().body("age", equalTo("43434"))
             .and().body("id", not(equalTo("9638652")))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("30 in dog years"));
+            .and().body("salary", equalTo("30 in dog years")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
     }
     /**
      * Confirms creation of previous test
@@ -566,13 +618,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+       String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("false"))
             .and().body("age", equalTo("Crist"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("12233"));
+            .and().body("salary", equalTo("12233")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
        /**
@@ -587,13 +644,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("wefevd"))
             .and().body("age", equalTo("68514"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("false"));
+            .and().body("salary", equalTo("false")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -608,13 +670,18 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("wefvcd"))
             .and().body("age", equalTo("false"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("786"));
+            .and().body("salary", equalTo("786")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -634,17 +701,22 @@ public class TestRest {
         person.set_picture("https://");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("Array"))
             .and().body("age", equalTo("false"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("786"));
+            .and().body("salary", equalTo("786")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
-     * Asserts Object type in name TODO
+     * Asserts Object type in name 
      *  
      */
     @Test 
@@ -718,13 +790,18 @@ public class TestRest {
         person.set_picture("https://");
 
         
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("MarcelineQueen")).and().
             body("salary", equalTo("-786")).and().
             body("age", equalTo("-3232")).and().
-            body("profile_picture",equalTo("https://"));
+            body("profile_picture",equalTo("https://")).and().
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -759,14 +836,19 @@ public class TestRest {
         person.set_picture("https://");
         person.set_rng("kmrrng");
         
-        new utils().POSTOpsWithBodyParams(person).then().
+       String id_string =  new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
             body("name", equalTo("Reactsss")).and().
             body("salary", equalTo("-786")).and().
             body("age", equalTo("-3232")).and().
             body("profile_picture",equalTo(null)).and().
-            body("rng",equalTo("kmrrng"));
+            body("rng",equalTo("kmrrng")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -820,13 +902,18 @@ public class TestRest {
         person.set_salary("233fff21212");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
              body("name",equalTo("null232")).and().
              body("age",equalTo("''")).and().
              body("salary",equalTo("233fff21212")).and().
-             body("profile_picture",equalTo(null));
+             body("profile_picture",equalTo(null)).and()
+             .extract().jsonPath().getJsonObject("id");
+            
+             person.set_id(id_string);
+             String id = person.getId();
+             System.out.println("Id of employee created: "+id);
 
     }
     /**
@@ -1122,9 +1209,23 @@ public class TestRest {
      * 
      */
     @Test
-    public void DummyDeleteEmployee(){
+    public void DummyDeleteEmployee_1(){
         Employee_Info person = new Employee_Info();
         person.set_id("2");
+
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
+    }
+    /**
+     * Asserts DELETE invalid employee string
+     * 
+     */
+    @Test
+    public void DummyDeleteEmployee_1_1(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("crispy");
 
         new utils().DELETE(person).then().
         assertThat().

@@ -9,6 +9,11 @@ import io.restassured.filter.Filter;
 import io.restassured.internal.RestAssuredResponseOptionsImpl;
 import io.restassured.path.json.JsonPath;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+
+import java.util.List;
+import java.util.Map;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -66,9 +71,45 @@ public class utils{
     }
 
     public Response GETbyname(Employee_Info person){
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.setBaseUri("http://dummy.restapiexample.com/api/v1/employees");
+        builder.setContentType(ContentType.JSON);
+        var requestSpec = builder.build();
+        Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
+        
+        String name = person.getName();
+        //first step from response to jsonstring
+        JsonObject json_body = (JsonObject) new Gson().toJsonTree(person);
+        String string_json_body = json_body.toString();
+        Request.body(string_json_body).get();
+
+        try{
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while((inputLine = in.readLine())!=null){
+                response.append(inputLine);
+            } in .close();
+        }catch (Exception e){
+            System.out.println("null value");
+        }
+        
 
 
-    return Request.get();
+        JsonObject response_jsonObject= new JsonObject(response.body().asString());
+        List<Map<String,String>> ret = response_jsonObject.get(name);
+        //jsonstring to JsonArray
+        for(Map<String,String> el: ret){
+            String target_name = el.get("employee_name");
+            if (name == target_name){
+                String target_id = el.get("id");
+                return RestAssured.given().get("http://dummy.restapiexample.com/api/v1/employee/"+target_id);
+                
+            }
+            else return null;
+        }
+        return null;
+
+
     }
     public Response WrongGetMethod(Employee_Info person){
 
