@@ -1,4 +1,15 @@
 # DummyRestTesting
-Public Git to test http://dummy.restapiexample.com/ a dummy API with Java and Postman
+Public Git to test [DummyApi](http://dummy.restapiexample.com/). RestFULLy.
 
+# Dependencies
+ - **Java** -> openjdk 11.0.4 
+ - **Maven** -> Apache Maven 3.6.0
+ 
+# Getting Started
+ - `clone git`
+ - `mvn test`
+ 
+ # Reports (Soon)
 (Warning: Test validation criteria is subjective and was not previously discussed)
+
+
