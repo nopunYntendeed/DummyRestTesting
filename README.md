@@ -6,6 +6,7 @@ Public Git to test [DummyApi](http://dummy.restapiexample.com/). RestFULLy.
  - **Maven** -> Apache Maven 3.6.0
  
 # Getting Started
+ - `clone git`
  - `mvn test`
  
  # Reports (Soon)
