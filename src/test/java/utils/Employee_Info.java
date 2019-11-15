@@ -17,7 +17,7 @@ public class Employee_Info {
     private Long salary_int;
     private String age;
     private Long age_int;
-    private String picture;
+    private String profile_picture;
     private String rng;
     private String id;
 
@@ -62,7 +62,7 @@ public class Employee_Info {
         this.id =  validatableResponse.toString();
     }
     public void set_picture(String picture){
-        this.picture = picture;
+        this.profile_picture = picture;
     }
     public void set_rng(String rng){
         this.rng = rng;
@@ -86,7 +86,7 @@ public class Employee_Info {
         return id;    
     }
     public String getPicture () {
-        return picture;    
+        return profile_picture;    
     }
     public String getRng () {
         return rng;    

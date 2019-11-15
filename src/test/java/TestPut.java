@@ -20,39 +20,39 @@ import java.util.List;
 
 public class TestPut {
 
-    @Test
-    public void DummyPutUpdate() {
-        Employee_Info person = new Employee_Info();
-        person.set_name("Jasus");
-        person.set_salary("-99");
-        person.set_age("-30");
-        person.set_id("1");
+    // @Test
+    // public void DummyPutUpdate() {
+    //     Employee_Info person = new Employee_Info();
+    //     person.set_name("Jasus");
+    //     person.set_salary("-99");
+    //     person.set_age("-30");
+    //     person.set_id("1");
 
-        new utils().PUTOpsWithBodyAndPathParams(person).
-        then().
-        assertThat().
-                statusCode(200).and().
-                body("name", equalTo("Jasus"))
-                .and().body("salary", equalTo("-99"))
-                .and().body("age", equalTo("-30"))
-                .and().body("profile_image", equalTo(""));
-    }
-    @Test 
-    public void DummyPostCreate(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("Truth");
-        person.set_salary("-99");
-        person.set_age("-73");
+    //     new utils().PUTOpsWithBodyAndPathParams(person).
+    //     then().
+    //     assertThat().
+    //             statusCode(200).and().
+    //             body("name", equalTo("Jasus"))
+    //             .and().body("salary", equalTo("-99"))
+    //             .and().body("age", equalTo("-30"))
+    //             .and().body("profile_image", equalTo(""));
+    // }
+    // @Test 
+    // public void DummyPostCreate(){
+    //     Employee_Info person = new Employee_Info();
+    //     person.set_name("Truth");
+    //     person.set_salary("-99");
+    //     person.set_age("-73");
 
 
-        new utils().POSTOpsWithBodyParams(person).then().
-        assertThat().
-             statusCode(200).and().
-            body("name", equalTo("Truth"))
-            .and().body("salary", equalTo("-99"))
-            .and().body("age", equalTo("-73"));
+    //     new utils().POSTOpsWithBodyParams(person).then().
+    //     assertThat().
+    //          statusCode(200).and().
+    //         body("name", equalTo("Truth"))
+    //         .and().body("salary", equalTo("-99"))
+    //         .and().body("age", equalTo("-73"));
 
-    }
+    // }
     @Test 
     public void DummyGetSingle_1(){
         Employee_Info person = new Employee_Info();
