@@ -11,6 +11,7 @@ Public Git to test [DummyApi](http://dummy.restapiexample.com/). RestFULLy.
  
  # Reports 
  [JunitApiReport](https://github.com/nopunYntendeed/DummyRestTesting/blob/master/DummyRestfulApiReportJunit.ods)
-(Warning: Test validation criteria is subjective and was not previously discussed)
+
+ (Warning: Test validation criteria is subjective and was not previously discussed)
 
 
