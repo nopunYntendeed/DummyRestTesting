@@ -950,6 +950,40 @@ public class TestRest {
         body(containsString("false"));
     }
     // /**
+    //  * Asserts update id with wierd url
+    //  * TODO brings method 405 on postman
+    //  */
+    @Test
+    public void DummyPutUpdate_4() {
+        Employee_Info person = new Employee_Info();
+        person.set_name("valid");
+        person.set_salary("7080");
+        person.set_age("-30");
+        person.set_id("bacon");
+
+
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo("valid"))
+                .and().body("salary", equalTo("7080"))
+                .and().body("age", equalTo("-30"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+
+    /**
+     * GET command to validate previous test
+     * 
+     */
+
+        person.set_id("bacon");
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("error"));
+    }
+    // /**
     //  * Confirms creation of previous test
     //  * 
     //  */
