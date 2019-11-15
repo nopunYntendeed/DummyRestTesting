@@ -380,61 +380,41 @@ public class TestRest {
             .and().body("id",equalTo(id_string));
     }
     
-     /**
-     * asserts wierd chars in name
+    /**
+     * asserts salary,name(it would if i could find it and delete it)  age  "" 
      */
     @Test 
     public void DummyPostCreate_5(){
+        String rngName = new utils().randomIdentifier();
         Employee_Info person = new Employee_Info();
-        person.set_name("ºçç+*ł#$%&/()");
-        person.set_salary("10000");
-        person.set_age("13");
+        person.set_name(rngName);
+        person.set_age("''");
+        person.set_salary("''");
         person.set_picture("https://");
 
 
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
-            body("name", equalTo("ºçç+*ł#$%&/()"))
-            .and().body("salary", equalTo("10000"))
-            .and().body("age", equalTo("13")).and()
-            .extract().jsonPath().getJsonObject("id");
-            
-            person.set_id(id_string);
-            String id = person.getId();
-            System.out.println("Id of employee created: "+id);
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8")
+             .and().body("employee_salary", equalTo(null))
+             .and().body("profile_picture", equalTo(null))
+             .and().body("employee_age", equalTo(null))
+             .extract().jsonPath().getJsonObject("id");
 
-    }
-     /**
+
+                 /**
      * Confirmation of previous test
+     * 
      */
-    @Test 
-    public void DummyPostCreate_5_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("95950");
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("name", not(equalTo("ºçç+*ł#$%&/()")))
-            .and().body("employee_salary", equalTo("10000"))
-            .and().body("employee_age", equalTo("13"));
-    }
-    /**
-     * asserts salary input mandatory
-     */
-    @Test 
-    public void DummyPostCreate_6(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("Tigre");
-        person.set_age("13");
-        person.set_picture("https://");
-
-
-        new utils().POSTOpsWithBodyParams(person).then().
-        assertThat().
-             statusCode(200).and().
-             body(containsString("error"));
+            header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body(containsString("false"));
 
     }
      /**
