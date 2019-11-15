@@ -127,14 +127,14 @@ public class utils{
 
 
     // class variable
-    final String lexicon = "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345674890!#$%&/()=<>!?";
+    final String lexicon = "abcdefghijlrmnstquvxyzo.,ABCDEFGHIJKLMNOPQRSTUVWXYZ12345674890!#$%&/()=<>!?";
 
     final java.util.Random rand = new java.util.Random();
 
     public String randomIdentifier() {
         StringBuilder builder = new StringBuilder();
         while(builder.toString().length() == 0) {
-            int length = rand.nextInt(5)+5;
+            int length = rand.nextInt(5)+15;
             for(int i = 0; i < length; i++) {
                 builder.append(lexicon.charAt(rand.nextInt(lexicon.length())));
             }

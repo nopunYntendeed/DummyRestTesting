@@ -57,6 +57,9 @@ public class TestRest {
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            header("Transfer-Encoding","chunked").and().
             body("employee_name", equalTo("Archer"))
             .and().body("employee_salary", equalTo("10"))
             .and().body("id", equalTo("1"))
@@ -112,12 +115,15 @@ public class TestRest {
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
              body(containsString("error"));
 
     }
     /**
      * Creates valid Employee
      */
+
     @Test 
     public void DummyPostCreate_2(){
 
@@ -132,7 +138,9 @@ public class TestRest {
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         
             assertThat().
-             statusCode(200).and().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
             body("name", equalTo(rngName))
             .and().body("salary", equalTo("29345533+3312312333213"))
             .and().body("profile_picture", equalTo(null))
@@ -143,14 +151,15 @@ public class TestRest {
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
 
-    }
+    //}
     /**
      * Asserts error because duplication of name
+     * Former DummyPostCreate_2_1
      */
-    @Test 
-    public void DummyPostCreate_2_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("999999999999999999999999999999999999999999999999999");
+    // @Test 
+    // public void DummyPostCreate_2_1(){
+        //Employee_Info person = new Employee_Info();
+        person.set_name(rngName);
         person.set_salary("10000");
         person.set_age("13");
 
@@ -158,63 +167,75 @@ public class TestRest {
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
             body(containsString("Integrity constraint violation: 1062"));
 
-    }
+    //}
      /**
      * Asserts GET can send body 
      * and
      * asserts GET created employee of DummyPostCreate_2
+     * and
+     * asserts math symbols and " " are not valid 
+     * Former DummyPostCreate_2_2
      * 
      */
-    @Test 
-    public void DummyPostCreate_2_2(){
-        Employee_Info person = new Employee_Info();
+    // @Test 
+    // public void DummyPostCreate_2_2(){
+        // Employee_Info person = new Employee_Info();
         person.set_name("Noheck");
         person.set_age("34343");
-        person.set_id("95923");
+        person.set_id(id_string);
  
-        String id_string = new utils().GETOpsBodyParams(person).then().
+        new utils().GETOpsBodyParams(person).then().
         assertThat().
              statusCode(200).and().
-             body("employee_name", equalTo("kek"))
-             .and().body("employee_salary", equalTo("10000"))
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body("employee_name", equalTo(rngName))
+             .and().body("employee_salary", equalTo("29345533"))
              .and().body("profile_picture", equalTo(null))
-             .and().body("employee_age", equalTo("13"))
-             .extract().jsonPath().getJsonObject("id");
+             .and().body("employee_age", equalTo("4343"))
+             .and().body("id",equalTo(id_string));
 
             
             person.set_id(id_string);
-            String id = person.getId();
+            // String id = person.getId();
             System.out.println("Id of employee created: "+id);
 
-    }
+    //}
     /**
      * Asserts DELETE can send body 
      * and
      * asserts DELETE
-     * 
+     * Former DummyPostCreate_2_3
      */
-    @Test 
-    public void DummyPostCreate_2_3(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("95923");
+    // @Test 
+    // public void DummyPostCreate_2_3(){
+
+        person.set_id(id_string);
 
         new utils().DELETE(person).then().
         assertThat().
         statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
         body(containsString("successfully! deleted Records"));
-    }
+    //}
     /**
      * Confirms DELETE with GET method
+     * Former DummyPostCreate_2_4
      */
-    @Test 
-    public void DummyPostCreate_2_4(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("95923");
+    // @Test 
+    // public void DummyPostCreate_2_4(){
+        // Employee_Info person = new Employee_Info();
+        person.set_id(id_string);
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
         body(containsString("false"));
 
     }
