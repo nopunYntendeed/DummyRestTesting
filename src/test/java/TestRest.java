@@ -672,6 +672,52 @@ public class TestRest {
             
 
     }
+    /**
+     * Asserts list type in name 
+     * @param List 
+     */
+    @Test 
+    public void DummyPostCreate_15(){
+        Employee_Info person = new Employee_Info();
+        List list = new ArrayList<>();
+
+        list.add("popcorn");
+        list.add("73");
+        person.set_name_array(list);
+        person.set_salary("786");
+        person.set_age("123");
+        person.set_picture("https://");
+
+
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            body("name", equalTo("Array"))
+            .and().body("age", equalTo("123"))
+            .and().body("profile_picture", equalTo("https://"))
+            .and().body("salary", equalTo("786")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+    /**
+     * Confirms creation of previous test
+     * 
+     */
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8")
+       .and().body("employee_salary", equalTo("0"))
+       .and().body("profile_image", equalTo(""))
+       .and().body("employee_age", equalTo("0"))
+       .and().body("id",equalTo(id_string));
+
+    }
     //    /**
     //  * Asserts bool type in salary
     //  */
