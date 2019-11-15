@@ -106,6 +106,7 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_1(){
         Employee_Info person = new Employee_Info();
+        person.set_name("wubalubdubdub");
 
 
         new utils().POSTOpsWithBodyParams(person).then().
@@ -119,10 +120,12 @@ public class TestRest {
      */
     @Test 
     public void DummyPostCreate_2(){
+
+        String rngName = new utils().randomIdentifier();
         Employee_Info person = new Employee_Info();
-        person.set_name("otot2222");
-        person.set_salary("10000");
-        person.set_age("13");
+        person.set_name(rngName);
+        person.set_salary("29345533+3312312333213");
+        person.set_age("4343 434343 -133434 ");
         person.set_picture("https://");
 
 
@@ -130,10 +133,10 @@ public class TestRest {
         
             assertThat().
              statusCode(200).and().
-            body("name", equalTo("otot2222"))
-            .and().body("salary", equalTo("10000"))
+            body("name", equalTo(rngName))
+            .and().body("salary", equalTo("29345533+3312312333213"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("age", equalTo("13"))
+            .and().body("age", equalTo("4343 434343 -133434 "))
             .extract().jsonPath().getJsonObject("id");
 
             person.set_id(id_string);
@@ -147,7 +150,7 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_2_1(){
         Employee_Info person = new Employee_Info();
-        person.set_name("kek");
+        person.set_name("999999999999999999999999999999999999999999999999999");
         person.set_salary("10000");
         person.set_age("13");
 
@@ -168,6 +171,7 @@ public class TestRest {
     public void DummyPostCreate_2_2(){
         Employee_Info person = new Employee_Info();
         person.set_name("Noheck");
+        person.set_age("34343");
         person.set_id("95923");
  
         String id_string = new utils().GETOpsBodyParams(person).then().
@@ -436,7 +440,7 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_8(){
         Employee_Info person = new Employee_Info();
-        person.set_name("rgfvdregf");
+        person.set_name("grfrqqqqqqqqq");
         person.set_salary("12233");
         person.set_age("Crist");
         person.set_picture("https://");
@@ -445,7 +449,7 @@ public class TestRest {
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("name", equalTo("rgfvdregf"))
+            body("name", equalTo("grfrqqqqqqqqq"))
             .and().body("age", equalTo("Crist"))
             .and().body("profile_picture", equalTo(null))
             .and().body("salary", equalTo("12233")).and()
@@ -462,14 +466,14 @@ public class TestRest {
     @Test 
     public void DummyPostCreate_8_1(){
         Employee_Info person = new Employee_Info();
-        person.set_id("97046");
+        person.set_id("103584");
 
 
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("employee_name", equalTo("Troelff"))
+            body("employee_name", equalTo("grfrqqqqqqqqq"))
             .and().body("employee_age", equalTo("0"))
             .and().body("profile_picture", equalTo(null))
             .and().body("employee_salary", equalTo("12233"));
@@ -796,7 +800,7 @@ public class TestRest {
             body("name", equalTo("MarcelineQueen")).and().
             body("salary", equalTo("-786")).and().
             body("age", equalTo("-3232")).and().
-            body("profile_picture",equalTo("https://")).and().
+            body("profile_picture",equalTo("https://")).and()
             .extract().jsonPath().getJsonObject("id");
             
             person.set_id(id_string);
