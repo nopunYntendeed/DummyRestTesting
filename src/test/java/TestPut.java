@@ -53,20 +53,20 @@ public class TestPut {
     //         .and().body("age", equalTo("-73"));
 
     // }
-    @Test 
-    public void DummyGetSingle_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("1");
+    // @Test 
+    // public void DummyGetSingle_1(){
+    //     Employee_Info person = new Employee_Info();
+    //     person.set_id("1");
 
-        new utils().GETOpsBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("employee_name", equalTo("Archer"))
-            .and().body("employee_salary", equalTo("10"))
-            .and().body("id", equalTo("1"))
-            .and().body("profile_image", equalTo(""))
-            .and().body("employee_age", equalTo("30"));
-    }
+    //     new utils().GETOpsBodyParams(person).then().
+    //     assertThat().
+    //         statusCode(200).and().
+    //         body("employee_name", equalTo("Archer"))
+    //         .and().body("employee_salary", equalTo("10"))
+    //         .and().body("id", equalTo("1"))
+    //         .and().body("profile_image", equalTo(""))
+    //         .and().body("employee_age", equalTo("30"));
+    // }
     @Test 
     public void DummyGetSingle_1_1(){
         Employee_Info person = new Employee_Info();

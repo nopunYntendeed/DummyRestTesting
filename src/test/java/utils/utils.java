@@ -7,12 +7,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.filter.Filter;
 import io.restassured.internal.RestAssuredResponseOptionsImpl;
-import io.restassured.path.json.JsonPath;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-
-import java.util.List;
-import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -70,14 +65,14 @@ public class utils{
         return Request.get();
     }
 
-    public Response GETbyname(Employee_Info person){
-        RequestSpecBuilder builder = new RequestSpecBuilder();
-        builder.setBaseUri("http://dummy.restapiexample.com/api/v1/employees");
-        builder.setContentType(ContentType.JSON);
-        var requestSpec = builder.build();
-        Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
+    //public Response GETbyname(Employee_Info person){
+        //RequestSpecBuilder builder = new RequestSpecBuilder();
+        // builder.setBaseUri("http://dummy.restapiexample.com/api/v1/employees");
+        // builder.setContentType(ContentType.JSON);
+        // var requestSpec = builder.build();
+        // Request = RestAssured.given().spec(requestSpec).filter(FORCE_JSON_RESPONSE_BODY);
         
-        String name = person.getName();
+        // String name = person.getName();
         //first step from response to jsonstring
 
         //Request.body(string_json_body).get();
@@ -106,10 +101,10 @@ public class utils{
         //     }
         //     else return null;
         // }
-        return null;
+        //return null;
 
 
-    }
+    //}
     public Response WrongGetMethod(Employee_Info person){
 
         RequestSpecBuilder builder = new RequestSpecBuilder();

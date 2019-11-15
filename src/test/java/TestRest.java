@@ -1,7 +1,6 @@
 
 import org.junit.Test;
 
-import cucumber.api.java.en.And;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -376,6 +375,13 @@ public class TestRest {
             .and().body("profile_image", equalTo(""))
             .and().body("employee_age", equalTo("2147483647"))
             .and().body("id",equalTo(id_string));
+            /**
+             * Deletes previous employee for repeatability
+             */
+            new utils().DELETE(person).then().
+            assertThat().
+            statusCode(200).and().
+            body(containsString("successfully! deleted Records"));
     }
     
     /**
@@ -406,7 +412,7 @@ public class TestRest {
      * Confirmation of previous test
      * 
      */
-
+        person.set_id(id_string);
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
@@ -983,313 +989,20 @@ public class TestRest {
         statusCode(200).and().
         body(containsString("error"));
     }
-    // /**
-    //  * Confirms creation of previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_1_2(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("1");//id returned from previous test
+     /**
+     * Asserts DELETE all with * supposed to fail
+     * FALSE TRUE
+     */
+    @Test
+    public void DummyDeleteEmployees(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("*");
 
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("driving"))
-    //     .and().body("employee_age", equalTo("-30"))
-    //     .and().body("profile_picture", equalTo(null))
-    //     .and().body("employee_salary", equalTo("0"));
-    // }
-
-   
-    // /**
-    //  * Asserts update name not valid if name already exists
-    //  */
-    // @Test
-    // public void DummyPutUpdate_1() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("null232");
-    //     person.set_salary("cookie");
-    //     person.set_age("-30");
-    //     person.set_id("1");
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body(containsString("error"));
-    // }
-
-
-    // /**
-    //  * Asserts update name correct
-    //  */
-    // @Test
-    // public void DummyPutUpdate_1_1() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("driving");
-    //     person.set_salary("cookie");
-    //     person.set_age("-30");
-    //     person.set_id("1");
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("driving"))
-    //             .and().body("salary", equalTo("cookie"))
-    //             .and().body("age", equalTo("-30"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
-
-            
-    //             // person.set_id(id_string);
-    //             // String id = person.getId();
-    //             // System.out.println("Id of employee created: "+id);
-    // }
-    // /**
-    //  * Confirms creation of previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_1_2(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("1");//id returned from previous test
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("driving"))
-    //     .and().body("employee_age", equalTo("-30"))
-    //     .and().body("profile_picture", equalTo(null))
-    //     .and().body("employee_salary", equalTo("0"));
-    // }
-    // /**
-    //  * GET command for control of valid employee
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_2(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("1");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("driving"))
-    //     .and().body("employee_age", equalTo("-30"))
-    //     .and().body("profile_picture", equalTo(null))
-    //     .and().body("employee_salary", equalTo("0"));
-    // }
-    // /**
-    //  * Asserts update name with negative int
-    //  */
-    // @Test
-    // public void DummyPutUpdate_2_1() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name_int(-73);
-    //     person.set_salary("rfn43kfr333'''");
-    //     person.set_age("-30");
-    //     person.set_id("1");
-    //     person.set_picture("ttyppssndfdofnofU$%&/()=NEOF4FI4NFOH4W89c4NU9WJE");
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("-73"))
-    //             .and().body("salary", equalTo("rfn43kfr333'''"))
-    //             .and().body("age", equalTo("-30"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
-    // }
-    // /**
-    //  * GET command to validate previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_2_2(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("1");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("-73"))
-    //     .and().body("employee_age", equalTo("-30"))
-    //     .and().body("profile_picture", equalTo(null))
-    //     .and().body("employee_salary", equalTo("0"));
-    // }
-    // /**
-    //  * Asserts update name with valid body to invalid empoyee
-    //  */
-    // @Test
-    // public void DummyPutUpdate_2_3() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name_int(-74);
-    //     person.set_salary("7080");
-    //     person.set_age("-30");
-    //     person.set_id("2");
-
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("-74"))
-    //             .and().body("salary", equalTo("7080"))
-    //             .and().body("age", equalTo("-30"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
-    // }
-    // /**
-    //  * GET command to validate previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_2_4(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("2");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body(containsString("false"));
-    // }
-    // /**
-    //  * Asserts update id with wierd url
-    //  * TODO brings method 405 on postman
-    //  */
-    // @Test
-    // public void DummyPutUpdate_3() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("valid");
-    //     person.set_salary("7080");
-    //     person.set_age("-30");
-    //     person.set_id("bacon");
-
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("valid"))
-    //             .and().body("salary", equalTo("7080"))
-    //             .and().body("age", equalTo("-30"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
-    // }
-    // /**
-    //  * GET command to validate previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_3_1(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("bacon");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body(containsString("error"));
-    // }
-    //  /**
-    //  * Asserts invalid fields for valid employee
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_4() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("F  4FFdw3334rfvdd%&/()");
-    //     person.set_salary_bool(false);
-    //     person.set_age("-999999999999999999999999999999999999999999999999");
-    //     person.set_id("96700");
-
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("F  4FFdw3334rfvdd%&/()"))
-    //             .and().body("salary", equalTo("false"))
-    //             .and().body("age", equalTo("-999999999999999999999999999999999999999999999999"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
-    // }
-    // /**
-    //  * GET command to validate previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_4_1(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("96700");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("F  4FFdw3334rfvdd%&/()"))
-    //     .and().body("employee_salary", equalTo("0"))
-    //     .and().body("employee_age", equalTo("-2147483648"))
-    //     .and().body("profile_picture",equalTo(null));
-    // }
-    // /**
-    //  * Asserts invalid extra fields for valid employee
-    //  * and explore testing for salary and age
-    //  */
-    // @Test
-    // public void DummyPutUpdate_5() {
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("Thorn.243,21'''");
-    //     person.set_salary("99999999999999999999999999999999999999999999999999999999999999999999999");
-    //     person.set_age_int(-9999999);
-    //     person.set_id("96700");
-    //     person.set_rng("random col info");
-
-
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("Thorn.243,21'''"))
-    //             .and().body("salary", equalTo("99999999999999999999999999999999999999999999999999999999999999999999999"))
-    //             .and().body("age", equalTo("-9999999"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .and().body("rng", equalTo("random col info"))
-    //             .extract().jsonPath().getJsonObject("id");
-    // }
-    // /**
-    //  * GET command to validate previous test
-    //  * 
-    //  */
-    // @Test
-    // public void DummyPutUpdate_5_1(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("96700");
-
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body("employee_name", equalTo("Thorn.243,21'''"))
-    //     .and().body("employee_salary", equalTo("2147483647"))
-    //     .and().body("employee_age", equalTo("-9999999"))
-    //     .and().body(not(containsString("rng")))
-    //     .and().body("profile_picture",equalTo(null));
-    // }
-    // /**
-    //  * Asserts DELETE all with * supposed to fail
-    //  * 
-    //  */
-    // @Test
-    // public void DummyDeleteEmployees(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("*");
-
-    //     new utils().DELETE(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body(containsString("successfully! deleted Records"));
-    // }
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
+    }
     /**
      * Asserts DELETE valid employee
      * 
@@ -1297,26 +1010,38 @@ public class TestRest {
     @Test
     public void DummyDeleteEmployee_1(){
         Employee_Info person = new Employee_Info();
-        person.set_id("108738");
+        person.set_id("104069");
 
         new utils().DELETE(person).then().
         assertThat().
         statusCode(200).and().
         body(containsString("successfully! deleted Records"));
     }
-    // /**
-    //  * Asserts DELETE invalid employee string
-    //  * 
-    //  */
-    // @Test
-    // public void DummyDeleteEmployee_1_1(){
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_id("crispy");
+       /**
+     * Asserts DELETE invalid employee
+     * 
+     */
+    @Test
+    public void DummyDeleteEmployee_2(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("crispy");
 
-    //     new utils().DELETE(person).then().
-    //     assertThat().
-    //     statusCode(200).and().
-    //     body(containsString("successfully! deleted Records"));
-    // }
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
+
+    /**
+     * validates previous test
+     */
+
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body(containsString("false"));
+    }
+    
 
 }

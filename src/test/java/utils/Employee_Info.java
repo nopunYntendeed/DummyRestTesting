@@ -1,6 +1,5 @@
 package utils;
 
-import static java.lang.String.join;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +13,7 @@ public class Employee_Info {
     private Object name_obj;
     private ArrayList name_array;
     private String salary;
-    private Long salary_int;
     private String age;
-    private Long age_int;
     private String profile_picture;
     private String rng;
     private String id;
