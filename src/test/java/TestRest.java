@@ -442,7 +442,7 @@ public class TestRest {
         assertThat().
              header("Server", "nginx/1.16.0").and().
              header("Content-Type", "text/html; charset=UTF-8").and().
-             body("name", equalTo("true")).log().all()
+             body("name", equalTo("true"))
              .and().body("age", equalTo("2332c4343"))
              .and().body("profile_picture", equalTo(null))
              .and().body("salary", equalTo("3v12v331v")).and()
@@ -470,156 +470,49 @@ public class TestRest {
 
     }
     /**
-     * asserts salary input with null
-     */
-    @Test 
-    public void DummyPostCreate_6_2(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("queque");
-        person.set_age("13");
-        person.set_picture("https://");
-        person.set_salary(null);
-
-
-        new utils().POSTOpsWithBodyParams(person).then().
-        assertThat().
-             statusCode(200).and().
-             body(containsString("error"));
-
-    }
-    /**
-     * asserts chars in salary
+     * asserts min of age name salary type int
+     * and 
      */
     @Test 
     public void DummyPostCreate_7(){
         Employee_Info person = new Employee_Info();
-        person.set_name("Spl");
-        person.set_salary("Souls");
-        person.set_age("13");
+        person.set_name_int(-999999998);
+        person.set_age_int(-999999999);
         person.set_picture("https://");
+        person.set_salary_int(1);
 
 
-        String id_string = new utils().POSTOpsWithBodyParams(person).then().
+       // String id_string = 
+        new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
-            statusCode(200).and().
-            body("name", equalTo("Spl"))
-            .and().body("age", equalTo("13"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("Souls")).and()
-            .extract().jsonPath().getJsonObject("id");
+             statusCode(200).and().
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().log().all().body(containsString("rfe"));
+    //          body("name", equalTo("-999999998"))
+    //          .and().body("age", equalTo("-999999999"))
+    //          .and().body("profile_picture", equalTo(null))
+    //          .and().body("salary", equalTo("-999999999")).and()
+    //          .extract().jsonPath().getJsonObject("id");
             
-            person.set_id(id_string);
-            String id = person.getId();
-            System.out.println("Id of employee created: "+id);
+    //          person.set_id(id_string);
+    //          String id = person.getId();
+    //          System.out.println("Id of employee created: "+id);
 
-    }
-    /**
-     * confirms previous test
-     */
-    @Test 
-    public void DummyPostCreate_7_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("96985");
+    //  /**
+    //  * Confirmation of previous test
+    //  * 
+    //  */
 
-
-
-        new utils().GETOpsBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("employee_name", equalTo("Spl"))
-            .and().body("employee_age", equalTo("13"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("employee_salary", equalTo("0"));
-
-    }
-        /**
-     * asserts chars in age
-     */
-    @Test 
-    public void DummyPostCreate_8(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("grfrqqqqqqqqq");
-        person.set_salary("12233");
-        person.set_age("Crist");
-        person.set_picture("https://");
-
-
-        String id_string = new utils().POSTOpsWithBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("name", equalTo("grfrqqqqqqqqq"))
-            .and().body("age", equalTo("Crist"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("12233")).and()
-            .extract().jsonPath().getJsonObject("id");
-            
-            person.set_id(id_string);
-            String id = person.getId();
-            System.out.println("Id of employee created: "+id);
-
-    }
-    /**
-     * confirms previous test
-     */
-    @Test 
-    public void DummyPostCreate_8_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("103584");
-
-
-
-        new utils().GETOpsBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("employee_name", equalTo("grfrqqqqqqqqq"))
-            .and().body("employee_age", equalTo("0"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("employee_salary", equalTo("12233"));
-
-    }
-    /**
-     * asserts chars in age
-     */
-    @Test 
-    public void DummyPostCreate_8_2(){
-        Employee_Info person = new Employee_Info();
-        person.set_name("ergregr");
-        person.set_salary("12233");
-        person.set_age("Cr323ist1223");
-        person.set_picture("https://");
-
-
-        String id_string = new utils().POSTOpsWithBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("name", equalTo("ergregr"))
-            .and().body("age", equalTo("Cr323ist1223"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("12233")).and()
-            .extract().jsonPath().getJsonObject("id");
-            
-            person.set_id(id_string);
-            String id = person.getId();
-            System.out.println("Id of employee created: "+id);
-
-    }
-    /**
-     * confirms previous test
-     */
-    @Test 
-    public void DummyPostCreate_8_3(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("98164");
-
-
-
-        new utils().GETOpsBodyParams(person).then().
-        assertThat().
-            statusCode(200).and().
-            body("employee_name", equalTo("ergregr"))
-            .and().body("employee_age", equalTo("0"))
-            .and().body("profile_picture", equalTo(null))
-            .and().body("employee_salary", equalTo("12233"));
+    //     new utils().GETOpsBodyParams(person).then().
+    //     assertThat().
+    //         statusCode(200).and().
+    //         header("Server", "nginx/1.16.0").and().
+    //          header("Content-Type", "text/html; charset=UTF-8").and().
+    //         body("name", equalTo("-999999998"))
+    //         .and().body("employee_salary", equalTo("-999999999"))
+    //         .and().body("profile_picture", equalTo(null))
+    //         .and().body("employee_age", equalTo("-999999999"))
+    //         .and().body("id",equalTo(id_string));
 
     }
     /**
@@ -627,15 +520,14 @@ public class TestRest {
      */
     @Test 
     public void DummyPostCreate_9(){
+        String rngName = new utils().randomIdentifier();
         Employee_Info person = new Employee_Info();
         person.set_id("97046");
-        person.set_name("Thorfinn");
+        person.set_name(rngName);
         person.set_age("43434");
         person.set_salary("95457046");
         person.set_picture("Ht");
         person.set_rng("createz");
-
-        
 
         new utils().OpsSimplePOST(person).then().
         assertThat().
