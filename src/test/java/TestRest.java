@@ -835,12 +835,12 @@ public class TestRest {
          * Updates another valid employee id (1) with the same name
          */
         Employee_Info person_with_same_name = new Employee_Info();
-        person.set_name(rngName);
-        person.set_salary("cookie");
-        person.set_age("-30");
-        person.set_id("1");
+        person_with_same_name.set_name(rngName);
+        person_with_same_name.set_salary("cookie");
+        person_with_same_name.set_age("-30");
+        person_with_same_name.set_id("1");
 
-        new utils().PUTOpsWithBodyAndPathParams(person).
+        new utils().PUTOpsWithBodyAndPathParams(person_with_same_name).
         then().
         assertThat().
                 statusCode(200).and().
@@ -848,31 +848,60 @@ public class TestRest {
     }
 
 
-    // /**
-    //  * Asserts update name correct
-    //  */
- 
-    //     Employee_Info person = new Employee_Info();
-    //     person.set_name("driving");
-    //     person.set_salary("cookie");
-    //     person.set_age("-30");
-    //     person.set_id("1");
+    /**
+     * Asserts update name to valid id
+     * and 
+     * salary and age string max value
+     */
+    @Test
+    public void DummyPutUpdate_2() {
+        String rngName = new utils().randomIdentifier();
+        Employee_Info person = new Employee_Info();
+        person.set_name(rngName);
+        person.set_salary("999999999999");
+        person.set_age("999999999999");
+        person.set_id("1");
+    /**
+     * establishes control
+     */
 
-    //     new utils().PUTOpsWithBodyAndPathParams(person).
-    //     then().
-    //     assertThat().
-    //             statusCode(200).and().
-    //             body("name", equalTo("driving"))
-    //             .and().body("salary", equalTo("cookie"))
-    //             .and().body("age", equalTo("-30"))
-    //             .and().body("profile_image", equalTo(null))
-    //             .extract().jsonPath().getJsonObject("id");
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body("employee_name", not(equalTo(rngName)))
+        .and().body("employee_age", not(equalTo("999999999999")))
+        .and().body("profile_image", equalTo(""))
+        .and().body("employee_salary", not(equalTo("999999999999")));
+    /**
+     * updates valid employee
+     */
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo(rngName)).and().
+                header("Server", "nginx/1.16.0").and().
+                header("Content-Type", "text/html; charset=UTF-8").and()
+                .and().body("salary", equalTo("999999999999"))
+                .and().body("age", equalTo("999999999999"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");       
+    /**
+     * validates previous test
+     */
 
-            
-    //             // person.set_id(id_string);
-    //             // String id = person.getId();
-    //             // System.out.println("Id of employee created: "+id);
-    // }
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body("employee_name", equalTo(rngName))
+        .and().body("employee_age", equalTo("2147483647"))
+        .and().body("profile_image", equalTo(""))
+        .and().body("employee_salary", equalTo("2147483647"));
+    }
     // /**
     //  * Confirms creation of previous test
     //  * 
