@@ -543,7 +543,7 @@ public class TestRest {
         person.set_age("43434");
         person.set_salary("95457046");
         person.set_picture("Ht");
-        person.set_rng("createz");
+        person.set_rng("create/2");
 
         new utils().OpsSimplePOST(person).then().
         assertThat().
@@ -555,7 +555,7 @@ public class TestRest {
      * Wrong body structure missing {} TODO
      */
     @Test 
-    public void DummyPostCreate_10(){
+    public void DummyPostCreate_9(){
         Employee_Info person = new Employee_Info();
         person.set_id("97046");
         person.set_name("Thorfinn{'treotre':'fheed'}");
@@ -574,47 +574,58 @@ public class TestRest {
     }
     
      /**
-     * Asserts int type in name
+     * Asserts mas int type in name, age and salary
+     * and 
+     * asserts POST cant create id in body but it is accepted
      */
     @Test 
-    public void DummyPostCreate_11(){
+    public void DummyPostCreate_10(){
         Employee_Info person = new Employee_Info();
-        person.set_id("9638652");
-        person.set_name_int(8765);
-        person.set_age("43434");
-        person.set_salary("30 in dog years");
+        person.set_id("2323122");
+        person.set_name_int(999999999);
+        person.set_age_int(999999999);
+        person.set_salary_int(999999999);
         person.set_picture("Ht");
 
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
         statusCode(200).and().
-            body("name", equalTo("8765"))
-            .and().body("age", equalTo("43434"))
-            .and().body("id", not(equalTo("9638652")))
+            header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", equalTo("999999999"))
+            .and().body("age", equalTo("999999999"))
+            .and().body("id", not(equalTo("2323122")))
             .and().body("profile_picture", equalTo(null))
-            .and().body("salary", equalTo("30 in dog years")).and()
+            .and().body("salary", equalTo("999999999")).and()
             .extract().jsonPath().getJsonObject("id");
             
             person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
-    }
+    
     /**
      * Confirms creation of previous test
      * 
      */
-    @Test
-    public void DummyPostCreate_11_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("97125");//id returned from previous test
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().
         statusCode(200).and().
-        body("employee_name", equalTo("8765"))
-        .and().body("employee_age", equalTo("43434"))
-        .and().body("profile_picture", equalTo(null))
-        .and().body("employee_salary", equalTo("30"));
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+       body("employee_name", equalTo("999999999"))
+       .and().body("employee_salary", equalTo("999999999"))
+       .and().body("profile_picture", equalTo(null))
+       .and().body("employee_age", equalTo("999999999"))
+       .and().body("id",equalTo(id_string));
+       
+        /**
+         * Deletes previous employee for repeatability
+         */
+        new utils().DELETE(person).then().
+        assertThat().
+        statusCode(200).and().
+        body(containsString("successfully! deleted Records"));
     }
     /**
      * Asserts bool type in name
@@ -640,6 +651,8 @@ public class TestRest {
             person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
+
+            
 
     }
        /**
