@@ -47,7 +47,7 @@ public class Employee_Info {
         this.salary = String.valueOf(salary_bool);
     }
     public void set_salary_int(int salary_int){
-        this.age = String.valueOf(salary_int);
+        this.salary = String.valueOf(salary_int);
     }
     public void set_age(String employee_age){
         this.age = employee_age;

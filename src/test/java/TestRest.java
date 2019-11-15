@@ -421,7 +421,7 @@ public class TestRest {
      * asserts salary input with chars
      * and 
      * name with type array TODO delete "Array" from db error duplicate appears even after deleting
-     * and name bool assert TODO delete "true" but this can be deleted
+     * 
      */
     @Test 
     public void DummyPostCreate_6(){
@@ -451,7 +451,7 @@ public class TestRest {
              person.set_id(id_string);
              String id = person.getId();
              System.out.println("Id of employee created: "+id);
-
+      
      /**
      * Confirmation of previous test
      * 
@@ -468,51 +468,67 @@ public class TestRest {
             .and().body("employee_age", equalTo("2332"))
             .and().body("id",equalTo(id_string));
 
+            /**
+             * Deletes previous employee for repeatability
+             */
+            new utils().DELETE(person).then().
+            assertThat().
+            statusCode(200).and().
+            body(containsString("successfully! deleted Records"));
+
     }
     /**
      * asserts min of age name salary type int
-     * and 
+     * 
      */
     @Test 
     public void DummyPostCreate_7(){
         Employee_Info person = new Employee_Info();
-        person.set_name_int(-999999998);
+        person.set_name_int(-999999999);
         person.set_age_int(-999999999);
         person.set_picture("https://");
-        person.set_salary_int(1);
+        person.set_salary_int(-999999999);
 
 
-       // String id_string = 
+        String id_string = 
         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
              header("Server", "nginx/1.16.0").and().
-             header("Content-Type", "text/html; charset=UTF-8").and().log().all().body(containsString("rfe"));
-    //          body("name", equalTo("-999999998"))
-    //          .and().body("age", equalTo("-999999999"))
-    //          .and().body("profile_picture", equalTo(null))
-    //          .and().body("salary", equalTo("-999999999")).and()
-    //          .extract().jsonPath().getJsonObject("id");
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body("name", equalTo("-999999999"))
+             .and().body("age", equalTo("-999999999"))
+             .and().body("profile_picture", equalTo(null))
+             .and().body("salary", equalTo("-999999999")).and()
+             .extract().jsonPath().getJsonObject("id");
             
-    //          person.set_id(id_string);
-    //          String id = person.getId();
-    //          System.out.println("Id of employee created: "+id);
+             person.set_id(id_string);
+             String id = person.getId();
+             System.out.println("Id of employee created: "+id);
 
-    //  /**
-    //  * Confirmation of previous test
-    //  * 
-    //  */
+     /**
+     * Confirmation of previous test
+     * 
+     */
 
-    //     new utils().GETOpsBodyParams(person).then().
-    //     assertThat().
-    //         statusCode(200).and().
-    //         header("Server", "nginx/1.16.0").and().
-    //          header("Content-Type", "text/html; charset=UTF-8").and().
-    //         body("name", equalTo("-999999998"))
-    //         .and().body("employee_salary", equalTo("-999999999"))
-    //         .and().body("profile_picture", equalTo(null))
-    //         .and().body("employee_age", equalTo("-999999999"))
-    //         .and().body("id",equalTo(id_string));
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body("employee_name", equalTo("-999999999"))
+            .and().body("employee_salary", equalTo("-999999999"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("employee_age", equalTo("-999999999"))
+            .and().body("id",equalTo(id_string));
+
+            /**
+             * Deletes previous employee for repeatability
+             */
+            new utils().DELETE(person).then().
+            assertThat().
+            statusCode(200).and().
+            body(containsString("successfully! deleted Records"));
 
     }
     /**
@@ -1185,7 +1201,7 @@ public class TestRest {
         .and().body("profile_picture",equalTo(null));
     }
     /**
-     * Asserts DELETE all with *
+     * Asserts DELETE all with * supposed to fail
      * 
      */
     @Test
@@ -1199,13 +1215,13 @@ public class TestRest {
         body(containsString("successfully! deleted Records"));
     }
     /**
-     * Asserts DELETE invalid employee
+     * Asserts DELETE valid employee
      * 
      */
     @Test
     public void DummyDeleteEmployee_1(){
         Employee_Info person = new Employee_Info();
-        person.set_id("97153");
+        person.set_id("108541");
 
         new utils().DELETE(person).then().
         assertThat().
