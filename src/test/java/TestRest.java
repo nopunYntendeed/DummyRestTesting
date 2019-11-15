@@ -535,7 +535,7 @@ public class TestRest {
      * Asserts wrong URL
      */
     @Test 
-    public void DummyPostCreate_9(){
+    public void DummyPostCreate_8(){
         String rngName = new utils().randomIdentifier();
         Employee_Info person = new Employee_Info();
         person.set_id("97046");
@@ -562,7 +562,7 @@ public class TestRest {
         person.set_age("43434");
         person.set_salary("95457046");
         person.set_picture("Ht");
-        person.set_rng("create");
+        person.set_rng("create/99999999");
 
         
 
