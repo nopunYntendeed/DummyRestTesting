@@ -106,12 +106,51 @@ public class TestRest {
     }
     /**
      * Creates empty body employer
-     * Assert error
+     * Assert error for empty name
      */
     @Test 
     public void DummyPostCreate_1(){
         Employee_Info person = new Employee_Info();
-        person.set_name("wubalubdubdub");
+
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body(containsString("error"));
+
+    }
+        /**
+     * Creates empty body employer
+     * Assert error empty salary
+     */
+    @Test 
+    public void DummyPostCreate_1_1(){
+        Employee_Info person = new Employee_Info();
+        String rngName = new utils().randomIdentifier();
+        person.set_name(rngName);
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body(containsString("error"));
+
+    }
+    /**
+     * Creates empty body employer
+     * Assert error with empty age
+     */
+    @Test 
+    public void DummyPostCreate_1_2(){
+        String rngName = new utils().randomIdentifier();
+        Employee_Info person = new Employee_Info();
+        person.set_name(rngName);
+        person.set_salary("234324243");
 
 
         new utils().POSTOpsWithBodyParams(person).then().
@@ -295,45 +334,50 @@ public class TestRest {
     }
 
     /**
-     * asserts ints in name
+     * asserts Wierd chars in name
+     * and
+     * Max of Salary and Age
      */
     @Test 
     public void DummyPostCreate_4(){
+
         Employee_Info person = new Employee_Info();
-        person.set_name("kek93760");
-        person.set_salary("10000");
-        person.set_age("13");
+        person.set_name("ºçç+*ł#$%&'/'!()");
+        person.set_salary("9999999999999999999999999999999999999999999999999999999999999999999");
+        person.set_age("9999999999999999999999999999999999999999999999999999999999999999999");
         person.set_picture("https://");
 
 
        String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
-            body("name", equalTo("kek93760"))
-            .and().body("salary", equalTo("10000"))
-            .and().body("age", equalTo("13")).and()
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", equalTo("ºçç+*ł#$%&'/'!()"))
+            .and().body("salary", equalTo("9999999999999999999999999999999999999999999999999999999999999999999"))
+            .and().body("age", equalTo("9999999999999999999999999999999999999999999999999999999999999999999")).and()
             .extract().jsonPath().getJsonObject("id");
             
             person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
 
-    }
+    //}
     /**
      * Confirmation of previous test
+     * 
      */
-    @Test 
-    public void DummyPostCreate_4_1(){
-        Employee_Info person = new Employee_Info();
-        person.set_id("95944");
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
-            body("name", not(equalTo("kek93760")))
-            .and().body("employee_salary", equalTo("10000"))
+            header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", not(equalTo("ºçç+*ł#$%&'/'!()")))
+            .and().body("employee_salary", equalTo("2147483647"))
             .and().body("profile_picture", equalTo(null))
-            .and().body("employee_age", equalTo("13"));
+            .and().body("employee_age", equalTo("2147483647"))
+            .and().body("id",equalTo(id_string));
     }
     
      /**
@@ -1018,7 +1062,7 @@ public class TestRest {
      * 
      */
     @Test
-    public void DummyPostCreate_1_2(){
+    public void DummyPutUpdate_1_2(){
         Employee_Info person = new Employee_Info();
         person.set_id("1");//id returned from previous test
 
