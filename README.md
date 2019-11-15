@@ -1,5 +1,5 @@
 # DummyRestTesting
-Public Git to test [DummyApi](http://dummy.restapiexample.com/). Restful
+Public Git to test [DummyApi](http://dummy.restapiexample.com/). Restfully.
 
 # Dependency
  -**Java** -> openjdk 11.0.4 
