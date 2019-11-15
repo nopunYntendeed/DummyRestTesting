@@ -404,7 +404,7 @@ public class TestRest {
              .extract().jsonPath().getJsonObject("id");
 
 
-                 /**
+    /**
      * Confirmation of previous test
      * 
      */
@@ -418,29 +418,55 @@ public class TestRest {
 
     }
      /**
-     * asserts salary input with ""
+     * asserts salary input with chars
+     * and 
+     * name with type array TODO delete "Array" from db error duplicate appears even after deleting
+     * and name bool assert TODO delete "true" but this can be deleted
      */
     @Test 
-    public void DummyPostCreate_6_1(){
+    public void DummyPostCreate_6(){
         Employee_Info person = new Employee_Info();
-        person.set_name("Ostra");
-        person.set_age("13");
-        person.set_picture("https://");
-        person.set_salary("''");
+        // List list = new ArrayList<>();
+
+        // list.add("popcorn");
+        // list.add("72");
+        //person.set_name_array(list);
+        person.set_name_bool(true);
+        person.set_age("2332c4343");
+        person.set_picture(null);
+        person.set_salary("3v12v331v");
 
 
-        String id_string = new utils().POSTOpsWithBodyParams(person).then().
+       String id_string =
+         new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
-             statusCode(200).and().
-             body("name", equalTo("Ostra"))
-             .and().body("age", equalTo("13"))
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body("name", equalTo("true")).log().all()
+             .and().body("age", equalTo("2332c4343"))
              .and().body("profile_picture", equalTo(null))
-             .and().body("salary", equalTo("''")).and()
+             .and().body("salary", equalTo("3v12v331v")).and()
              .extract().jsonPath().getJsonObject("id");
             
              person.set_id(id_string);
              String id = person.getId();
              System.out.println("Id of employee created: "+id);
+
+     /**
+     * Confirmation of previous test
+     * 
+     */
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", equalTo(null))
+            .and().body("employee_salary", equalTo("3"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("employee_age", equalTo("2332"))
+            .and().body("id",equalTo(id_string));
 
     }
     /**
@@ -1287,7 +1313,7 @@ public class TestRest {
     @Test
     public void DummyDeleteEmployee_1(){
         Employee_Info person = new Employee_Info();
-        person.set_id("2");
+        person.set_id("97153");
 
         new utils().DELETE(person).then().
         assertThat().
