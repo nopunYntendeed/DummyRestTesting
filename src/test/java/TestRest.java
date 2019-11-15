@@ -418,17 +418,13 @@ public class TestRest {
      /**
      * asserts salary input with chars
      * and 
-     * name with type array TODO delete "Array" from db error duplicate appears even after deleting
+     * name with type array 
      * 
      */
     @Test 
     public void DummyPostCreate_6(){
         Employee_Info person = new Employee_Info();
-        // List list = new ArrayList<>();
 
-        // list.add("popcorn");
-        // list.add("72");
-        //person.set_name_array(list);
         person.set_name_bool(true);
         person.set_age("2332c4343");
         person.set_picture("3132312332");
@@ -674,10 +670,12 @@ public class TestRest {
     }
     /**
      * Asserts list type in name 
+     * Only fails because name has already been populated
+     * andd cant be deleted with DELETE
      * @param List 
      */
     @Test 
-    public void DummyPostCreate_15(){
+    public void DummyPostCreate_12(){
         Employee_Info person = new Employee_Info();
         List list = new ArrayList<>();
 
@@ -692,6 +690,8 @@ public class TestRest {
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
             statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
             body("name", equalTo("Array"))
             .and().body("age", equalTo("123"))
             .and().body("profile_picture", equalTo("https://"))
@@ -712,11 +712,33 @@ public class TestRest {
         statusCode(200).and().
         header("Server", "nginx/1.16.0").and().
         header("Content-Type", "text/html; charset=UTF-8")
-       .and().body("employee_salary", equalTo("0"))
+       .and().body("employee_salary", equalTo("768"))
        .and().body("profile_image", equalTo(""))
-       .and().body("employee_age", equalTo("0"))
+       .and().body("employee_age", equalTo("123"))
        .and().body("id",equalTo(id_string));
 
+    }
+    /**
+     * Asserts Object type in name 
+     *  
+     */
+    @Test 
+    public void DummyPostCreate_13(){
+        Employee_Info person = new Employee_Info();
+        Map<String, String> map = new HashMap<String,String>();
+        person.set_name_obj(map);
+        person.set_salary("786");
+        person.set_age_bool(false);
+        person.set_picture("https://");
+
+
+        new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+             statusCode(200).and().
+             body(containsString("error"));
+            // .and().body("age", equalTo("false"))
+            // .and().body("profile_picture", equalTo(null))
+            // .and().body("salary", equalTo("786"));
     }
     //    /**
     //  * Asserts bool type in salary
