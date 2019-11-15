@@ -77,7 +77,9 @@ public class TestRest {
 
         new utils().GETOpsBodyParams(person).then().
         assertThat().
-            statusCode(200)
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8")
             .and().body(containsString("false"));
     }
     /**
@@ -241,29 +243,54 @@ public class TestRest {
     }
     /**
      * Tests POST Create Id doesnt set
+     * and
+     * Tests Min for Salary and Age
+     * and 
+     * Asserts picture is not set as string
      */
     @Test 
     public void DummyPostCreate_3(){
+        String rngName = new utils().randomIdentifier();
         Employee_Info person = new Employee_Info();
-        person.set_name("rtfd");
-        person.set_id("6");
-        person.set_age("22");
-        person.set_salary("73");
+        person.set_name(rngName);
+        person.set_id("24443");
+        person.set_age("-9999999999999999999999999999999999999999999");
+        person.set_salary("-99999999999999999999999999999999999999999");
+        person.set_picture("rmfirfrirfior4i4444");
  
         String id_string = new utils().POSTOpsWithBodyParams(person).then().
         assertThat().
              statusCode(200).and().
-             body("name", equalTo("rtfd"))
-             .and().body("age", equalTo("22"))
-             .and().body("salary", equalTo("73"))
+             header("Server", "nginx/1.16.0").and().
+             header("Content-Type", "text/html; charset=UTF-8").and().
+             body("name", equalTo(rngName))
+             .and().body("age", equalTo("-9999999999999999999999999999999999999999999"))
+             .and().body("salary", equalTo("-99999999999999999999999999999999999999999"))
              .and().body("profile_picture", equalTo(null))
-             .and().body("id",not(equalTo(person.getId())))
+             .and().body("id",not(equalTo("24443")))
              .extract().jsonPath().getJsonObject("id");
 
             
             person.set_id(id_string);
             String id = person.getId();
             System.out.println("Id of employee created: "+id);
+            
+
+            new utils().GETOpsBodyParams(person).then().
+            assertThat().
+                 statusCode(200).and().
+                 header("Server", "nginx/1.16.0").and().
+                 header("Content-Type", "text/html; charset=UTF-8").and().
+                 body("employee_name", equalTo(rngName))
+                 .and().body("employee_salary", equalTo("-2147483648"))
+                 .and().body("profile_picture", equalTo(null))
+                 .and().body("employee_age", equalTo("-2147483648"))
+                 .and().body("id",equalTo(id_string));
+    
+                
+                person.set_id(id_string);
+                //String id = person.getId();
+                System.out.println("Id of employee created: "+id);
 
     }
 
