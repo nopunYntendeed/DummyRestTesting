@@ -1,7 +1,7 @@
 # DummyRestTesting
 Public Git to test [DummyApi](http://dummy.restapiexample.com/). RestFULLy.
 
-# Dependency
+# Dependencies
  - **Java** -> openjdk 11.0.4 
  - **Maven** -> Apache Maven 3.6.0
  
