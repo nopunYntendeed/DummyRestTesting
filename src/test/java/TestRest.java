@@ -902,6 +902,53 @@ public class TestRest {
         .and().body("profile_image", equalTo(""))
         .and().body("employee_salary", equalTo("2147483647"));
     }
+    /**
+     * Asserts update name to invalid id
+     * and 
+     * salary and age string max value
+     */
+    @Test
+    public void DummyPutUpdate_3() {
+        String rngName = new utils().randomIdentifier();
+        Employee_Info person = new Employee_Info();
+        person.set_name(rngName);
+        person.set_salary("999999999999");
+        person.set_age("999999999999");
+        person.set_id("2");
+    /**
+     * establishes control
+     */
+
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body(containsString("false"));  /**
+     * updates valid employee
+     */
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo(rngName)).and().
+                header("Server", "nginx/1.16.0").and().
+                header("Content-Type", "text/html; charset=UTF-8").and()
+                .and().body("salary", equalTo("999999999999"))
+                .and().body("age", equalTo("999999999999"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");       
+    /**
+     * validates previous test
+     */
+
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body(containsString("false"));
+    }
     // /**
     //  * Confirms creation of previous test
     //  * 
