@@ -9,7 +9,8 @@ Public Git to test [DummyApi](http://dummy.restapiexample.com/). RestFULLy.
  - `clone git`
  - `mvn test`
  
- # Reports (Soon)
+ # Reports 
+ [JunitApiReport](https://github.com/nopunYntendeed/DummyRestTesting/blob/master/DummyRestfulApiReportJunit.ods)
 (Warning: Test validation criteria is subjective and was not previously discussed)
 
 
