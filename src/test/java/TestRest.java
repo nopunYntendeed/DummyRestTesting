@@ -736,10 +736,74 @@ public class TestRest {
         assertThat().
              statusCode(200).and().
              body(containsString("error"));
-            // .and().body("age", equalTo("false"))
-            // .and().body("profile_picture", equalTo(null))
-            // .and().body("salary", equalTo("786"));
     }
+    /**
+     * Asserts wrong method error when create into post
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_14(){
+        Employee_Info person = new Employee_Info();
+        person.set_name("fpaa95");
+        person.set_salary("786");
+        person.set_age("3232");
+        person.set_picture("https://");
+
+        
+        new utils().WrongGetMethod(person).then().
+        assertThat().
+            statusCode(405).and().
+            body(containsString("Method not allowed"));
+
+    }
+    /**
+     * Asserts permission of not valid fields in request body
+     * 
+     */
+    @Test 
+    public void DummyPostCreate_15(){
+        String rngName = new utils().randomIdentifier();
+        Employee_Info person = new Employee_Info();
+        person.set_name(rngName);
+        person.set_salary("-786");
+        person.set_age("-3232");
+        person.set_picture("https://");
+        person.set_rng("kmrrng");
+
+       String id_string =  new utils().POSTOpsWithBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", equalTo(rngName)).and().
+            body("salary", equalTo("-786")).and().
+            body("age", equalTo("-3232")).and().
+            body("profile_picture",equalTo("https://")).and().
+            body("rng",equalTo("kmrrng")).and()
+            .extract().jsonPath().getJsonObject("id");
+            
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+    /**
+     * confirms previous test 
+     */
+
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            body("employee_name", equalTo(rngName))
+            .and().body("employee_age", equalTo("-3232"))
+            .and().body("profile_image", equalTo(""))
+            .and().body("employee_salary", equalTo("-786"))
+            .and().body(not(containsString("rng")));
+
+    }
+
     //    /**
     //  * Asserts bool type in salary
     //  */
