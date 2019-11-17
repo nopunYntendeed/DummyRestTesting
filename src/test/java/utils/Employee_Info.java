@@ -4,7 +4,6 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.restassured.response.ValidatableResponse;
 
 public class Employee_Info {
     private Object name;
@@ -12,11 +11,12 @@ public class Employee_Info {
     private Boolean name_bool;
     private Object name_obj;
     private ArrayList name_array;
-    private String salary;
-    private String age;
+    private Object salary;
+    private Object age;
     private String profile_picture;
     private String rng;
-    private String id;
+    private Object id;
+
 
     public void set_name(String employee_name) {
         this.name = employee_name;
@@ -55,8 +55,8 @@ public class Employee_Info {
     public void set_age_bool(Boolean age_bool){
         this.age = String.valueOf(age_bool);
     }
-    public void set_id(ValidatableResponse validatableResponse){
-        this.id =  validatableResponse.toString();
+    public void set_id(List list){
+        this.id =  list.toString();
     }
     public void set_picture(String picture){
         this.profile_picture = picture;
@@ -64,6 +64,28 @@ public class Employee_Info {
     public void set_rng(String rng){
         this.rng = rng;
     }
+    public void set_id(String id) {
+        this.id  = id;
+    }
+    public void set_id_int(int id_int) {
+        this.id = String.valueOf(id_int);
+    }
+    public void set_id_bool(Boolean id_bool) {
+        this.id = String.valueOf(id_bool);
+    }
+
+    public void set_id_array(List<Object> id_array) {
+        this.id = id_array;
+    }
+    public void set_salary_array(List<Object> salary_array) {
+        this.salary = salary_array;
+    }
+    public void set_age_array(List<Object> age_array) {
+        this.age = age_array;
+    }
+    public void set_salary_obj(Object set_name) {
+        this.salary = salary;
+	}
     public String getName () {
         return (String) name;
     }
@@ -74,13 +96,13 @@ public class Employee_Info {
         return name_bool;    
     }
     public String getSalary () {
-        return salary;    
+        return (String) salary;
     }
     public String getAge () {
-        return age;    
+        return (String) age;    
     }
     public String getId () {
-        return id;    
+        return (String) id;
     }
     public String getPicture () {
         return profile_picture;    
@@ -88,12 +110,7 @@ public class Employee_Info {
     public String getRng () {
         return rng;    
     }
-	public void set_id(String id) {
-        this.id  = id;
-	}
-
-
-
+	
 
 
 }

@@ -25,6 +25,8 @@ public class TestRest {
      * Asserts GET of body of employee id /1
      * and 
      * valid PUT request body 
+     * and 
+     * valid get request body
      */
     @Test 
     public void DummyGetSingle_1(){
@@ -49,7 +51,10 @@ public class TestRest {
         // person.set_id(id_string);
         // String id = person.getId();
         // System.out.println("Id of employee created: "+id);
-
+        person.set_name(rngName);
+        person.set_age("syrup");
+        person.set_salary_int(323232);
+        person.set_picture("tuff");
         new utils().GETOpsBodyParams(person).then().
         assertThat().
             statusCode(200).and().
@@ -67,7 +72,7 @@ public class TestRest {
      * 
      */
     @Test 
-    public void DummyGetSingle_1_1(){
+    public void DummyGetSingle_2(){
         Employee_Info person = new Employee_Info();
         person.set_id("2");
 
@@ -77,6 +82,102 @@ public class TestRest {
             header("Server", "nginx/1.16.0").and().
             header("Content-Type", "text/html; charset=UTF-8")
             .and().body(containsString("false"));
+    }
+    /**
+     * Asserts that id int is accepted
+     * 
+     */
+    @Test 
+    public void DummyGetSingle_3(){
+        Employee_Info person = new Employee_Info();
+        person.set_id_int(1);
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            header("Connection","keep-alive")//.and().
+           // body("employee_name", equalTo(rngName))
+            .and().body("employee_salary", equalTo("29345533"))
+            .and().body("id", equalTo("1"))
+            .and().body("profile_image", equalTo(""))
+            .and().body("employee_age", equalTo("174343"));
+    }
+    /**
+     * Asserts that id bool is accepted
+     * 
+     */
+    @Test 
+    public void DummyGetSingle_4(){
+        Employee_Info person = new Employee_Info();
+        person.set_id_bool(true);
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            header("Connection","keep-alive")//.and().
+           // body("employee_name", equalTo(rngName))
+            .and().body("employee_salary", equalTo("29345533"))
+            .and().body("id", equalTo("1"))
+            .and().body("profile_image", equalTo(""))
+            .and().body("employee_age", equalTo("174343"));
+    }
+    /**
+     * Asserts that id array > is accepted
+     * @param List 
+     */
+    
+    // @Test 
+    // public void DummyGetSingle_5(){
+    //     Employee_Info person = new Employee_Info();
+    //     List list = new ArrayList<>();
+        
+    //     person.set_id(list);
+        
+
+    //     new utils().GETOpsBodyParams(person).then().
+    //     assertThat().
+    //         statusCode(200).and().
+    //         header("Server", "nginx/1.16.0").and().
+    //         header("Content-Type", "text/html; charset=UTF-8").and().
+    //         header("Connection","keep-alive")//.and().
+    //        // body("employee_name", equalTo(rngName))
+    //         .and().body(containsString("Illegal"));
+    // }
+
+    /**
+     * Asserts that employee /2 has false response body
+     * 
+     */
+    @Test 
+    public void DummyGetSingle_6(){
+        Employee_Info person = new Employee_Info();
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8")
+            .and().body(containsString("error"));
+    }
+       /**
+     * Asserts that string chars id is not accepted
+     * 
+     */
+    @Test 
+    public void DummyGetSingle_7(){
+        Employee_Info person = new Employee_Info();
+        person.set_id("milk");
+
+        new utils().GETOpsBodyParams(person).then().
+        assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8")
+            .and().body(containsString("error"));
     }
     /**
      * Asserts Get all size is not 3
@@ -418,13 +519,14 @@ public class TestRest {
             statusCode(200).and().
             header("Server", "nginx/1.16.0").and().
              header("Content-Type", "text/html; charset=UTF-8").and().
-            body(containsString("false"));
-
+             and().body("employee_salary", equalTo("0"))
+             .and().body("profile_picture", equalTo(null))
+             .and().body("employee_age", equalTo("0"));
     }
      /**
      * asserts salary input with chars
      * and 
-     * name with type array 
+     * name with type Boolean 
      * 
      */
     @Test 
@@ -989,6 +1091,191 @@ public class TestRest {
         statusCode(200).and().
         body(containsString("error"));
     }
+     /* Asserts array in salary
+      *
+      */
+    @Test
+    public void DummyPutUpdate_5() {
+        Employee_Info person = new Employee_Info();
+        String rngName = new utils().randomIdentifier();
+        person.set_name(rngName);
+        person.set_age("-30");
+        person.set_salary("33333333");
+
+
+        String id_string = new utils().POSTOpsWithBodyParams(person).then().
+        
+            assertThat().
+            statusCode(200).and().
+            header("Server", "nginx/1.16.0").and().
+            header("Content-Type", "text/html; charset=UTF-8").and().
+            body("name", equalTo(rngName))
+            .and().body("salary", equalTo("33333333"))
+            .and().body("profile_picture", equalTo(null))
+            .and().body("age", equalTo("-30"))
+            .extract().jsonPath().getJsonObject("id");
+
+            person.set_id(id_string);
+            String id = person.getId();
+            System.out.println("Id of employee created: "+id);
+
+        /**
+         * Updates the newly created employee with an array in salary
+         */
+        List list = new ArrayList<>();
+
+        list.add("42");
+        list.add("73");
+        person.set_salary_array(list);
+        person.set_id(id_string);
+        person.set_age("40");
+        new utils().PUTOpsWithBodyAndPathParams(person).
+        then().
+        assertThat().
+                statusCode(200).and().
+                body("name", equalTo(rngName))
+                .and().body("salary", equalTo("Array"))
+                .and().body("age", equalTo("40"))
+                .and().body("profile_image", equalTo(null))
+                .extract().jsonPath().getJsonObject("id");
+
+    /**
+     * validates previous test
+     */
+
+    new utils().GETOpsBodyParams(person).then().
+    assertThat().
+        statusCode(200).and().
+        header("Server", "nginx/1.16.0").and().
+        header("Content-Type", "text/html; charset=UTF-8").and().
+        body("name", equalTo(null))
+        .and().body("salary", equalTo(null))
+        .and().body("age", equalTo(null))
+        .and().body("profile_image", equalTo(""));
+    }
+     /* Asserts array in age
+      *
+      */
+      @Test
+      public void DummyPutUpdate_6() {
+          Employee_Info person = new Employee_Info();
+          String rngName = new utils().randomIdentifier();
+          person.set_name(rngName);
+          person.set_age("-30");
+          person.set_salary("33333333");
+  
+  
+          String id_string = new utils().POSTOpsWithBodyParams(person).then().
+          
+              assertThat().
+              statusCode(200).and().
+              header("Server", "nginx/1.16.0").and().
+              header("Content-Type", "text/html; charset=UTF-8").and().
+              body("name", equalTo(rngName))
+              .and().body("salary", equalTo("33333333"))
+              .and().body("profile_picture", equalTo(null))
+              .and().body("age", equalTo("-30"))
+              .extract().jsonPath().getJsonObject("id");
+  
+              person.set_id(id_string);
+              String id = person.getId();
+              System.out.println("Id of employee created: "+id);
+  
+          /**
+           * Updates the newly created employee with an array in salary
+           */
+          List list = new ArrayList<>();
+  
+          list.add("42");
+          list.add("73");
+          person.set_age_array(list);
+          person.set_id(id_string);
+          person.set_salary("40");
+          new utils().PUTOpsWithBodyAndPathParams(person).
+          then().
+          assertThat().
+                  statusCode(200).and().
+                  body("name", equalTo(rngName))
+                  .and().body("salary", equalTo("40"))
+                  .and().body("age", equalTo("Array"))
+                  .and().body("profile_image", equalTo(null))
+                  .extract().jsonPath().getJsonObject("id");
+  
+      /**
+       * validates previous test
+       */
+  
+      new utils().GETOpsBodyParams(person).then().
+      assertThat().
+          statusCode(200).and().
+          header("Server", "nginx/1.16.0").and().
+          header("Content-Type", "text/html; charset=UTF-8")
+          .and().body("salary", equalTo(null))
+          .and().body("age", equalTo(null))
+          .and().body("profile_image", equalTo(""))
+          .extract().jsonPath().getJsonObject("id");
+      }
+          /* Asserts object in age
+      *
+      */
+      @Test
+      public void DummyPutUpdate_7() {
+          Employee_Info person = new Employee_Info();
+          String rngName = new utils().randomIdentifier();
+          person.set_name(rngName);
+          person.set_age("-30");
+          person.set_salary("33333333");
+  
+  
+          String id_string = new utils().POSTOpsWithBodyParams(person).then().
+          
+              assertThat().
+              statusCode(200).and().
+              header("Server", "nginx/1.16.0").and().
+              header("Content-Type", "text/html; charset=UTF-8").and().
+              body("name", equalTo(rngName))
+              .and().body("salary", equalTo("33333333"))
+              .and().body("profile_picture", equalTo(null))
+              .and().body("age", equalTo("-30"))
+              .extract().jsonPath().getJsonObject("id");
+  
+              person.set_id(id_string);
+              String id = person.getId();
+              System.out.println("Id of employee created: "+id);
+  
+          /**
+           * Updates the newly created employee with an array in salary
+           */
+          Map<String, String> map = new HashMap<String,String>();
+
+          person.set_salary_obj(map);
+          person.set_age("42");
+          person.set_id(id_string);
+
+          new utils().PUTOpsWithBodyAndPathParams(person).
+          then().
+          assertThat().
+                  statusCode(200).and().
+                  body("name", equalTo(rngName))
+                  .and().body("salary", equalTo("33333333"))
+                  .and().body("age", equalTo("42"))
+                  .and().body("profile_image", equalTo(null))
+                  .extract().jsonPath().getJsonObject("id");
+  
+    //   /**
+    //    * validates previous test
+    //    */
+  
+      new utils().GETOpsBodyParams(person).then().
+      assertThat().
+          statusCode(200).and().
+          header("Server", "nginx/1.16.0").and().
+          header("Content-Type", "text/html; charset=UTF-8")
+          .and().body("salary", equalTo(null))
+          .and().body("age", equalTo(null))
+          .and().body("profile_image", equalTo(""))
+          .extract().jsonPath().getJsonObject("id");
+      }
      /**
      * Asserts DELETE all with * supposed to fail
      * FALSE TRUE
@@ -1029,7 +1316,7 @@ public class TestRest {
         new utils().DELETE(person).then().
         assertThat().
         statusCode(200).and().
-        body(containsString("successfully! deleted Records"));
+        body(containsString("error success"));
 
     /**
      * validates previous test
